@@ -214,13 +214,13 @@ import recepteurs.*;
             }
             else if (args[i].matches("-ampl")){
             	i++;
-            	if (args[i].matches("[0-9]{1,5}")){
+            	if (args[i].matches("[-]*[0-9]{1,5}")){
             		amplMin = new Float(args[i]);
             	}
             	else
             		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             	i++;
-            	if (args[i].matches("[0-9]{1,5}")){
+            	if (args[i].matches("[-]*[0-9]{1,5}")){
             		amplMax = new Float(args[i]);
             	}
             	else

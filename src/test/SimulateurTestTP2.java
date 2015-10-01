@@ -67,7 +67,7 @@ public class SimulateurTestTP2 {
 		simulateur.execute();
 		collector.checkThat(simulateur.calculTauxErreurBinaire(),is((float)0));
 		
-		String options8[] = {"-form","NRZ","-ampl","2","9"};
+		String options8[] = {"-form","NRZ","-ampl","-2","9"};
 		simulateur = new Simulateur(options8);
 		simulateur.execute();
 		collector.checkThat(simulateur.calculTauxErreurBinaire(),is((float)0));
