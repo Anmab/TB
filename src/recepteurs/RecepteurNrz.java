@@ -11,6 +11,7 @@ public class RecepteurNrz extends Transmetteur<Float,Boolean>
 	@Override
 	public void recevoir(Information<Float> information) throws InformationNonConforme 
 	{
+		// test
 		this.informationRecue = information;
 	  	  if (informationRecue == null)
 	 			throw new InformationNonConforme("Erreur : Information non conforme");
