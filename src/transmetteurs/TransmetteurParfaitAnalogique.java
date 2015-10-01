@@ -3,7 +3,7 @@ import destinations.*;
 import information.*;
 
 
-public class TransmetteurParfaitAnalogique extends Transmetteur <float,float >{
+public class TransmetteurParfaitAnalogique extends Transmetteur <boolean,boolean >{
 	public TransmetteurParfaitAnalogique(){
 		super();
 	}
@@ -12,7 +12,7 @@ public class TransmetteurParfaitAnalogique extends Transmetteur <float,float >{
 	 * Cette m�thode, en fin d'ex�cution, appelle la m�thode �mettre.
     * @param information  l'information  re�ue
     */
-       public void recevoir(Information <float> information) throws InformationNonConforme {
+       public void recevoir(Information <boolean> information) throws InformationNonConforme {
     	   this.informationRecue = information;
      	  if (informationRecue == null)
     			throw new InformationNonConforme("Erreur : Information non conforme");
@@ -35,7 +35,7 @@ public class TransmetteurParfaitAnalogique extends Transmetteur <float,float >{
     		  for (int i = 0 ; i < informationRecue.nbElements(); i++)
     			  informationEmise.add(true);
     			  */
-    		  for (DestinationInterface <float> destinationConnectee : destinationsConnectees) {
+    		  for (DestinationInterface <boolean> destinationConnectee : destinationsConnectees) {
     			  destinationConnectee.recevoir(informationEmise);
     		  }
     	  }
