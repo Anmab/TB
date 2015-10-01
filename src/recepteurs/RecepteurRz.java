@@ -47,8 +47,7 @@ public class RecepteurRz extends Transmetteur<Float,Boolean>
 	 				 
 	 		 }
 	 	  }
-		  
-	 		  		  
+		    		  
  		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
  		  {
  			  destinationConnectee.recevoir(informationEmise);

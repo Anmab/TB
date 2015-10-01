@@ -1,4 +1,5 @@
 package simulateur;
+
 import sources.*;
 import destinations.*;
 import transmetteurs.*;
@@ -226,6 +227,9 @@ import recepteurs.*;
             	if (args[i].matches("[0-9]{1,5}")){
             		amplMax = new Float(args[i]);
             	}
+            	if (amplMin<amplMax){
+            		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
+            	}
             	else 
                     throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             }
@@ -308,6 +312,5 @@ import recepteurs.*;
                System.exit(-2);
             }           	
       }
-   	
    }
 

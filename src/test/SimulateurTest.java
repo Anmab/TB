@@ -30,6 +30,9 @@ public class SimulateurTest {
 		}
 	
 	//Test des arguments invalide
+	/**
+	 * Test sans argument
+	 */
 	@Test
 	public void testArg() {
 	  String invalideOptions1[] = {" "};
@@ -40,6 +43,9 @@ public class SimulateurTest {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 	}
+	/**
+	 * argument non valide sdfqsdf
+	 */
 	@Test
 	public void testArg2() {
 	  String invalideOptions1[] = {"qsdfqsdf"};
@@ -50,6 +56,9 @@ public class SimulateurTest {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 	}
+	/**
+	 * -mess avec option incorrect
+	 */
 	@Test
 	public void testArg3() {
 	  String invalideOptions1[] = {"-mess","a"};
