@@ -3,8 +3,8 @@ import destinations.*;
 import information.*;
 
 
-public class TransmetteurParfait extends Transmetteur < Boolean , Boolean >{
-	public TransmetteurParfait(){
+public class TransmetteurParfaitLogique extends Transmetteur < Boolean , Boolean >{
+	public TransmetteurParfaitLogique(){
 		super();
 	}
    /**
