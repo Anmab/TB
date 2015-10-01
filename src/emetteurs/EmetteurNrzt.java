@@ -30,6 +30,7 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 	 * �met l'information construite par le transmetteur  
 	 */
       public void emettre() throws InformationNonConforme{
+    	  Information informationEmise = new Information() ;
  	  if (informationRecue == null)
 			throw new InformationNonConforme("Erreur : Information non conforme");
  	  else{

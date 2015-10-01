@@ -32,6 +32,7 @@ public class RecepteurNrz extends Transmetteur<Float,Boolean>
 
 	@Override
 	public void emettre() throws InformationNonConforme {
+		Information informationEmise = new Information() ;
 		  if (informationRecue == null)
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  

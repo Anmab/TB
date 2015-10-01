@@ -152,8 +152,6 @@ import recepteurs.*;
       public  void analyseArguments(String[] args)  throws  ArgumentsException {
       		
          for (int i=0;i<args.length;i++){ 
-        	 System.out.println(args[i]);
-        	 System.out.println(i);
               
             if (args[i].matches("-s")){
                affichage = true;
