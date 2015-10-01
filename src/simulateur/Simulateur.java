@@ -229,8 +229,6 @@ import recepteurs.*;
             	if (amplMin>amplMax){
             		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             	}
-            	else 
-                    throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             }
             else throw new ArgumentsException("Option invalide :"+ args[i]);
          }
