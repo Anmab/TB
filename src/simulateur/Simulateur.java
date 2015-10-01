@@ -25,7 +25,10 @@ import java.lang.Math;
       
       // Analogique
       private String forme = null; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
-      private int nbEch =30 ; /** indique au Simulateur le nombre d'echantillons utilisé par symbole
+      private Integer nbEch =30 ; /** indique au Simulateur le nombre d'echantillons utilisé par symbole*/
+      private float amplMin = 0.0f; /** indique au Simulateur l'amplitude min du signal */
+      private float amplMax = 1.0f; /** indique au Simulateur l'amplitude max du signal */
+    
       private Source <Boolean>  source = null; /** le  composant Source de la chaine de transmission */
       private Transmetteur <Boolean, Boolean>  transmetteurLogique = null;/** le  composant Transmetteur parfait logique de la chaine de transmission */
       private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
@@ -139,7 +142,40 @@ import java.lang.Math;
                else 
                   throw new ArgumentsException("Valeur du parametre -mess invalide : " + args[i]);
             }
-                                   
+            else if(args[i].matches("-form")){
+            	i++; 
+            	if (args[i].matches("NRZ")) {
+            		forme = "NRZ";
+            	}
+            	else if(args[i].matches("NRZT")) {
+            		forme = "NRZT";
+            	}
+            	else if(args[i].matches("RZ")) {
+            		forme = "RZ";
+            	}
+                else 
+                    throw new ArgumentsException("Valeur du parametre -gorm invalide : " + args[i]);
+            }
+            else if (args[i].matches("-nbEch")){
+            	i++;
+            	if (args[i].matches("[0-9]{1,5}")){
+            		nbEch = new Integer(args[i]);
+            	}
+            	else 
+                    throw new ArgumentsException("Valeur du parametre -nbEch invalide : " + args[i]);
+            }
+            else if (args[i].matches("-ampl")){
+            	i++;
+            	if (args[i].matches("[0-9]{1,5}")){
+            		amplMin = new Float(args[i]);
+            	}
+            	i++;
+            	if (args[i].matches("[0-9]{1,5}")){
+            		amplMax = new Float(args[i]);
+            	}
+            	else 
+                    throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
+            }
             else throw new ArgumentsException("Option invalide :"+ args[i]);
          }
       
