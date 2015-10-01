@@ -46,13 +46,13 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 		 for (int i=0; i<informationRecue.nbElements();i++) {
 			 if(informationRecue.iemeElement(i) == true){
 				 for(int j=0; j<nbEch/3; j++){
-					 informationEmise.add(ampMax*(1/3)*nbEch);
+					 informationEmise.add(ampMax/((1/3)*nbEch));
 				 }
 				 for(int j =nbEch; j<nbEch*2/3; j++){
 					 informationEmise.add(ampMax);
 				 }
 				 for(int j =nbEch*2/3; j<nbEch; j++){
-					 informationEmise.add(-ampMax*(1/3)*nbEch);
+					 informationEmise.add(-ampMax/((1/3)*nbEch));
 				 }
 			 }
 			 else{
