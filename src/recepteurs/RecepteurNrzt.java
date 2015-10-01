@@ -36,21 +36,22 @@ public class RecepteurNrzt extends Transmetteur<Float,Boolean>
 		  if (informationRecue == null)
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  
-	 	  else 
-	 	  {
-	 		 for (int i=0; i<informationRecue.nbElements();i++)
-	 			 { if (nbEch/2 == ampMax)
-	 				 informationEmise.add(true);
-	 			 else
-	 				 informationEmise.add(false);
+	 	  else {
+	 		 for (int i=nbEch/2; i<informationRecue.nbElements();i+=nbEch){
+	 			 if (informationRecue.iemeElement(i) >= (ampMax-ampMin / 2)){
+	 				informationEmise.add(true);
 	 			 }
-				
-	 		  		  
-	 		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
-	 		  {
-	 			  destinationConnectee.recevoir(informationEmise);
-	 		  }
+	 			 else{
+	 				informationEmise.add(false);
+	 			 }
+	 				 
+	 		 }
 	 	  }
+		    		  
+ 		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
+ 		  {
+ 			  destinationConnectee.recevoir(informationEmise);
+ 		  }
 	}
 }
 	
