@@ -51,7 +51,7 @@ import java.lang.Math;
         	 source = new SourceFixe(messageString);
          }
          
-         transmetteurLogique = new TransmetteurParfait();
+         transmetteurLogique = new TransmetteurParfaitLogique();
          destination = new DestinationFinale();
          source.connecter(transmetteurLogique);
          transmetteurLogique.connecter(destination);
