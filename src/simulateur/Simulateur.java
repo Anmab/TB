@@ -48,8 +48,8 @@ import recepteurs.*;
       public  Simulateur(String [] args) throws ArgumentsException {
 
          analyseArguments(args); // analyser et r�cup�rer les arguments
-         //Signal NRZ
-         if (forme == "NRZ"){
+         //Signal Analogique
+         if (forme != null){
              if (messageAleatoire == true && aleatoireAvecGerme == false){
             	 //Source aléatoire sans seed
             	 source = new SourceAleatoire(nbBitsMess);
@@ -65,8 +65,18 @@ import recepteurs.*;
             
              transmetteurAnalogique = new TransmetteurParfaitAnalogique();
              destination = new DestinationFinale();
-             emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
-             recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
+             if(forme=="NRZ"){
+            	 emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
+                 recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
+             }
+             else if (forme=="RZ"){
+            	 emetteur = new EmetteurRz(nbEch,amplMin,amplMax);
+                 recepteur = new RecepteurRz(nbEch,amplMin,amplMax);
+             }
+             else
+            	 emetteur = new EmetteurNrzt(nbEch,amplMin,amplMax);
+                 recepteur = new RecepteurNrzt(nbEch,amplMin,amplMax);
+             }
              source.connecter(emetteur);
              emetteur.connecter(transmetteurAnalogique);
              transmetteurAnalogique.connecter(recepteur);
@@ -112,16 +122,8 @@ import recepteurs.*;
              }
          }
 
-         }
-         
-         
-         
-         
-         
-         
+     }
 
-     		
-      }
 
    /** La m�thode analyseArguments extrait d'un tableau de cha�nes de caract�res les diff�rentes options de la simulation. 
    * Elle met � jour les attributs du Simulateur.
