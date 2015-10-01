@@ -1,14 +1,28 @@
 package emetteurs;
 
-import information.Information;
-import information.InformationNonConforme;
 import transmetteurs.Transmetteur;
 import destinations.DestinationInterface;
 import information.*;
 
 public class EmetteurNrz extends Transmetteur<Boolean,Float>{
+	private int nbEch ;
+	private float ampMin;
+	private float ampMax;
+	
 	public EmetteurNrz(){
 		super();
+		nbEch = 30;
+		ampMin = 0.0f;
+		ampMax = 1.0f;
+	}
+	public void setnbEch(int nbEch){
+		this.nbEch = nbEch;
+	}
+	public void setampMin(float ampMin){
+		this.ampMin = ampMin;
+	}
+	public void setampMax(float ampMax){
+		this.ampMax = ampMax;
 	}
 	
     public void recevoir(Information <Boolean> information) throws InformationNonConforme {
@@ -29,17 +43,14 @@ public class EmetteurNrz extends Transmetteur<Boolean,Float>{
  	  else{
 
 		 for (int i=0; i<informationRecue.nbElements();i++) {
-			 int nbEchanSymbole = 30;
-			 Float amplitudeMax = (float)1;
-			 Float amplitudeMin = (float)-1;
 			 if(informationRecue.iemeElement(i) == true){
-				 for(int j =0; j<nbEchanSymbole; j++){
-					 informationEmise.add(amplitudeMax);
+				 for(int j =0; j<nbEch; j++){
+					 informationEmise.add(ampMax);
 				 }
 			 }
 			 else{
-				 for(int j =0; j<nbEchanSymbole; j++){
-					 informationEmise.add(amplitudeMin);
+				 for(int j =0; j<nbEch; j++){
+					 informationEmise.add(ampMin);
 				 }
 			 }
  		  }
