@@ -67,14 +67,21 @@ import recepteurs.*;
              destination = new DestinationFinale();
              emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
              recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
-             source.connecter(transmetteurLogique);
-             transmetteurLogique.connecter(destination);
+             source.connecter(emetteur);
+             emetteur.connecter(transmetteurAnalogique);
+             transmetteurAnalogique.connecter(recepteur);
+             recepteur.connecter(destination);
              if(affichage == true){
             	 //Avec sonde
             	 SondeLogique soundeLogique1 = new SondeLogique("Sonde1",1920);
             	 SondeLogique soundeLogique2 = new SondeLogique("Sonde2",1920);
                  source.connecter(soundeLogique1);
-                 transmetteurLogique.connecter(soundeLogique2);       	 
+                 recepteur.connecter(soundeLogique2); 
+                 
+                 SondeAnalogique soundeanalogique1 = new SondeAnalogique("Sonde3");
+                 SondeAnalogique soundeanalogique2 = new SondeAnalogique("Sonde3");
+                 emetteur.connecter(soundeanalogique1);
+                 transmetteurAnalogique.connecter(soundeanalogique2);
              }
              
          //Signal logique
