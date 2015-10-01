@@ -30,7 +30,7 @@ import recepteurs.*;
       private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
       
       // Analogique
-      private String forme = null; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
+      private String forme = "non"; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
       private Integer nbEch =30 ; /** indique au Simulateur le nombre d'echantillons utilisé par symbole*/
       private float amplMin = 0.0f; /** indique au Simulateur l'amplitude min du signal */
       private float amplMax = 1.0f; /** indique au Simulateur l'amplitude max du signal */
@@ -49,80 +49,70 @@ import recepteurs.*;
       public  Simulateur(String [] args) throws ArgumentsException {
 
          analyseArguments(args); // analyser et r�cup�rer les arguments
-         //Signal Analogique
-         if (forme != null){
-             if (messageAleatoire == true && aleatoireAvecGerme == false){
-            	 //Source aléatoire sans seed
-            	 source = new SourceAleatoire(nbBitsMess);
+         //Source
+         if (messageAleatoire == true && aleatoireAvecGerme == false){
+        	 //Source aléatoire sans seed
+        	 source = new SourceAleatoire(nbBitsMess);
+         }
+         if (messageAleatoire == true && aleatoireAvecGerme == true){
+        	 //Source aléatoire sans seed
+        	 source = new SourceAleatoire(nbBitsMess,seed);
+         }
+         if (messageAleatoire == false){
+        	 //Soruce fix
+        	 source = new SourceFixe(messageString);
+         }
+         //Transmetteur
+         if(forme =="non"){
+        	 transmetteurLogique = new TransmetteurParfaitLogique();
+         }
+         else{
+        	 transmetteurAnalogique = new TransmetteurParfaitAnalogique();
+         }
+         //Destination
+         destination = new DestinationFinale();
+         //emmeteur-recepteurs
+         if(forme=="NRZ"){
+        	 emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
+         }
+         if (forme=="RZ"){
+        	 emetteur = new EmetteurRz(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurRz(nbEch,amplMin,amplMax);
+         }
+         if (forme=="NRZT"){
+        	 emetteur = new EmetteurNrzt(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurNrzt(nbEch,amplMin,amplMax);
+         }
+         
+         //Connections
+         if(forme=="non"){
+             source.connecter(transmetteurLogique);
+             transmetteurLogique.connecter(destination);
+             if(affichage==true){
+            	 SondeLogique soundeLogique1 = new SondeLogique("Sonde Logique1",1920);
+	        	 SondeLogique soundeLogique2 = new SondeLogique("Sonde Logique2",1920);
+                 source.connecter(soundeLogique1);
+                 transmetteurLogique.connecter(soundeLogique2); 
              }
-             if (messageAleatoire == true && aleatoireAvecGerme == true){
-            	 //Source aléatoire sans seed
-            	 source = new SourceAleatoire(nbBitsMess,seed);
-             }
-             if (messageAleatoire == false){
-            	 //Soruce fix
-            	 source = new SourceFixe(messageString);
-             }
-            
-             transmetteurAnalogique = new TransmetteurParfaitAnalogique();
-             destination = new DestinationFinale();
-             if(forme=="NRZ"){
-            	 emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
-                 recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
-             }
-             else if (forme=="RZ"){
-            	 emetteur = new EmetteurRz(nbEch,amplMin,amplMax);
-                 recepteur = new RecepteurRz(nbEch,amplMin,amplMax);
-             }
-             else
-            	 emetteur = new EmetteurNrzt(nbEch,amplMin,amplMax);
-                 recepteur = new RecepteurNrzt(nbEch,amplMin,amplMax);
-             }
-             source.connecter(emetteur);
+         }
+         else{
+        	 source.connecter(emetteur);
              emetteur.connecter(transmetteurAnalogique);
              transmetteurAnalogique.connecter(recepteur);
              recepteur.connecter(destination);
-             if(affichage == true){
-            	 //Avec sonde
-            	 SondeLogique soundeLogique1 = new SondeLogique("Sonde1",1920);
-            	 SondeLogique soundeLogique2 = new SondeLogique("Sonde2",1920);
+             if(affichage==true){
+            	 SondeLogique soundeLogique1 = new SondeLogique("Sonde Logique1",1920);
+	        	 SondeLogique soundeLogique2 = new SondeLogique("Sonde Logique2",1920);
+                 SondeAnalogique soundeanalogique1 = new SondeAnalogique("Sonde Analogique1");
+                 SondeAnalogique soundeanalogique2 = new SondeAnalogique("Sonde Analogique2");
                  source.connecter(soundeLogique1);
-                 recepteur.connecter(soundeLogique2); 
-                 
-                 SondeAnalogique soundeanalogique1 = new SondeAnalogique("Sonde3");
-                 SondeAnalogique soundeanalogique2 = new SondeAnalogique("Sonde3");
+                 recepteur.connecter(soundeLogique2);
                  emetteur.connecter(soundeanalogique1);
                  transmetteurAnalogique.connecter(soundeanalogique2);
-             }
-             
-         //Signal logique
-         else if (forme == null){
-             if (messageAleatoire == true && aleatoireAvecGerme == false){
-            	 //Source aléatoire sans seed
-            	 source = new SourceAleatoire(nbBitsMess);
-             }
-             if (messageAleatoire == true && aleatoireAvecGerme == true){
-            	 //Source aléatoire sans seed
-            	 source = new SourceAleatoire(nbBitsMess,seed);
-             }
-             if (messageAleatoire == false){
-            	 //Soruce fix
-            	 source = new SourceFixe(messageString);
-             }
-             
-             transmetteurLogique = new TransmetteurParfaitLogique();
-             destination = new DestinationFinale();
-             source.connecter(transmetteurLogique);
-             transmetteurLogique.connecter(destination);
-             if(affichage == true){
-            	 //Avec sonde
-            	 SondeLogique soundeLogique1 = new SondeLogique("Sonde1",1920);
-            	 SondeLogique soundeLogique2 = new SondeLogique("Sonde2",1920);
-                 source.connecter(soundeLogique1);
-                 transmetteurLogique.connecter(soundeLogique2);       	 
+                 
              }
          }
-
      }
 
 
@@ -162,11 +152,13 @@ import recepteurs.*;
       public  void analyseArguments(String[] args)  throws  ArgumentsException {
       		
          for (int i=0;i<args.length;i++){ 
-         
+        	 System.out.println(args[i]);
+        	 System.out.println(i);
               
             if (args[i].matches("-s")){
                affichage = true;
             }
+            
             else if (args[i].matches("-seed")) {
                aleatoireAvecGerme = true;
                i++; 
@@ -195,7 +187,7 @@ import recepteurs.*;
                }
                else 
                   throw new ArgumentsException("Valeur du parametre -mess invalide : " + args[i]);
-            }
+            }            
             else if(args[i].matches("-form")){
             	i++; 
             	if (args[i].matches("NRZ")) {
@@ -210,10 +202,14 @@ import recepteurs.*;
                 else 
                     throw new ArgumentsException("Valeur du parametre -gorm invalide : " + args[i]);
             }
+            
             else if (args[i].matches("-nbEch")){
             	i++;
             	if (args[i].matches("[0-9]{1,5}")){
             		nbEch = new Integer(args[i]);
+            		if(nbEch < 1){
+            			throw new ArgumentsException("Valeur du parametre -nbEch invalide : " + args[i]);
+            		}
             	}
             	else 
                     throw new ArgumentsException("Valeur du parametre -nbEch invalide : " + args[i]);
@@ -223,11 +219,16 @@ import recepteurs.*;
             	if (args[i].matches("[0-9]{1,5}")){
             		amplMin = new Float(args[i]);
             	}
+            	else
+            		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             	i++;
             	if (args[i].matches("[0-9]{1,5}")){
             		amplMax = new Float(args[i]);
             	}
-            	if (amplMin<amplMax){
+            	else
+            		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
+            	
+            	if (amplMin>amplMax){
             		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             	}
             	else 
