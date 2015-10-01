@@ -3,7 +3,7 @@ import destinations.*;
 import information.*;
 
 
-public class TransmetteurParfaitAnalogique extends Transmetteur < float , float >{
+public class TransmetteurParfaitAnalogique extends Transmetteur <float,float >{
 	public TransmetteurParfaitAnalogique(){
 		super();
 	}
