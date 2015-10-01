@@ -31,29 +31,26 @@ public class RecepteurNrz extends Transmetteur<Float,Boolean>
 	}
 
 	@Override
-	public void emettre() throws InformationNonConforme 
-	{
-		 if (informationRecue == null)
+	public void emettre() throws InformationNonConforme {
+		  if (informationRecue == null)
 				throw new InformationNonConforme("Erreur : Information non conforme");
-	 	  else
-	 		 for (int i=0; i<informationRecue.nbElements();i++) 
-	 		 {
-				 if(informationRecue.iemeElement(i) == 1.0) {
-					 for(int j =0; j<nbEch; j++) {
-						 informationEmise.add(true);
-					 }
-				 }
-				 else {
-					 for(int j =0; j<nbEch; j++) {
-						 informationEmise.add(false);
-					 }
-				 }
-	 		  }
-
-			 for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
-			 {
-	 			  destinationConnectee.recevoir(informationEmise);
-			 }
+		  
+	 	  else {
+	 		 for (int i=nbEch/2; i<informationRecue.nbElements();i+=nbEch){
+	 			 if (informationRecue.iemeElement(i) >= (ampMax-ampMin / 2)){
+	 				informationEmise.add(true);
+	 			 }
+	 			 else{
+	 				informationEmise.add(false);
+	 			 }
+	 				 
+	 		 }
 	 	  }
+		    		  
+ 		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
+ 		  {
+ 			  destinationConnectee.recevoir(informationEmise);
+ 		  }
+	}
 }
-
+	
