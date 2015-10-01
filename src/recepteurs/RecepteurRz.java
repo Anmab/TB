@@ -1,13 +1,11 @@
-package emetteurs;
-
+package recepteurs;
+import destinations.DestinationInterface;
 import information.Information;
 import information.InformationNonConforme;
-import transmetteurs.Transmetteur;
-import destinations.DestinationInterface;
-import information.*;
+import transmetteurs.*;
 
-public class EmetteurNrz extends Transmetteur<Boolean,Float>{
-	public EmetteurNrz(){
+public class RecepteurRz extends Transmetteur<Boolean,Float> {
+	public RecepteurRz(){
 		super();
 	}
 	
@@ -19,30 +17,24 @@ public class EmetteurNrz extends Transmetteur<Boolean,Float>{
    		informationRecue = information;
   	  	emettre();
     }
-    
-	 /**
-	 * �met l'information construite par le transmetteur  
-	 */
-      public void emettre() throws InformationNonConforme{
+ /**
+ * �met l'information construite par le transmetteur  
+ */
+   public void emettre() throws InformationNonConforme{
  	  if (informationRecue == null)
 			throw new InformationNonConforme("Erreur : Information non conforme");
  	  else{
-
+ 		  // Transmision parfaite
  		  this.informationEmise = informationRecue;
-
-		 for (DestinationInterface <Float> destinationConnectee : destinationsConnectees) {
- 			  destinationConnectee.recevoir(informationEmise);
- 		  }
- 		  
- 		  
- 		  
- 		  
- 		  
- 		  
+ 		  //Transmition erroné
+ 		  /*
+ 		  Information informationEmise = new Information() ;
+ 		  for (int i = 0 ; i < informationRecue.nbElements(); i++)
+ 			  informationEmise.add(true);
+ 			  */
  		  for (DestinationInterface <Float> destinationConnectee : destinationsConnectees) {
  			  destinationConnectee.recevoir(informationEmise);
  		  }
  	  }
-   }
-
+	  }
 }
