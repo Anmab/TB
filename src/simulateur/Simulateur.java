@@ -22,6 +22,10 @@ import java.lang.Math;
       private int nbBitsMess = 100; /** la longueur du message al�atoire � transmettre si un message n'est pas impose */
       private String messageString = "100";   /** la cha�ne de caract�res correspondant � m dans l'argument -mess m */
    	
+      
+      // Analogique
+      private String forme = null; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
+      private int nbEch =30 ; /** indique au Simulateur le nombre d'echantillons utilisé par symbole
       private Source <Boolean>  source = null; /** le  composant Source de la chaine de transmission */
       private Transmetteur <Boolean, Boolean>  transmetteurLogique = null;/** le  composant Transmetteur parfait logique de la chaine de transmission */
       private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
