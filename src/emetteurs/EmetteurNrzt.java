@@ -10,19 +10,10 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 	private float ampMin;
 	private float ampMax;
 	
-	public EmetteurNrzt(){
+	public EmetteurNrzt(int nbEch, float ampMin,float ampMax){
 		super();
-		nbEch = 30;
-		ampMin = 0.0f;
-		ampMax = 1.0f;
-	}
-	public void setnbEch(int nbEch){
 		this.nbEch = nbEch;
-	}
-	public void setampMin(float ampMin){
 		this.ampMin = ampMin;
-	}
-	public void setampMax(float ampMax){
 		this.ampMax = ampMax;
 	}
 	
