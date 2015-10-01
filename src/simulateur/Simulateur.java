@@ -5,6 +5,8 @@ import transmetteurs.*;
 import information.*;
 import visualisations.*;
 import java.lang.Math;
+import emetteurs.*;
+import recepteurs.*;
 
 
 
@@ -22,6 +24,9 @@ import java.lang.Math;
       private int nbBitsMess = 100; /** la longueur du message al�atoire � transmettre si un message n'est pas impose */
       private String messageString = "100";   /** la cha�ne de caract�res correspondant � m dans l'argument -mess m */
    	
+      private Source <Boolean>  source = null; /** le  composant Source de la chaine de transmission */
+      private Transmetteur <Boolean, Boolean>  transmetteurLogique = null;/** le  composant Transmetteur parfait logique de la chaine de transmission */
+      private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
       
       // Analogique
       private String forme = null; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
@@ -29,10 +34,9 @@ import java.lang.Math;
       private float amplMin = 0.0f; /** indique au Simulateur l'amplitude min du signal */
       private float amplMax = 1.0f; /** indique au Simulateur l'amplitude max du signal */
     
-      private Source <Boolean>  source = null; /** le  composant Source de la chaine de transmission */
-      private Transmetteur <Boolean, Boolean>  transmetteurLogique = null;/** le  composant Transmetteur parfait logique de la chaine de transmission */
-      private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
-   	
+      private Transmetteur <Float, Float>  transmetteurAnalogique = null;/** le  composant Transmetteur parfait Analogique de la chaine de transmission */
+      private Transmetteur <Boolean, Float> emetteur = null; /** le  composant emetteur parfait Analogique de la chaine de transmission */
+      private Transmetteur <Float, Boolean> recepteur = null; /** le  composant recepteur parfait Analogique de la chaine de transmission */
    
    /** Le constructeur de Simulateur construit une cha�ne de transmission compos�e d'une Source <Boolean>, d'une Destination <Boolean> et de Transmetteur(s) [voir la m�thode analyseArguments]...  
    * <br> Les diff�rents composants de la cha�ne de transmission (Source, Transmetteur(s), Destination, Sonde(s) de visualisation) sont cr��s et connect�s.
@@ -44,31 +48,71 @@ import java.lang.Math;
       public  Simulateur(String [] args) throws ArgumentsException {
 
          analyseArguments(args); // analyser et r�cup�rer les arguments
+         //Signal NRZ
+         if (forme == "NRZ"){
+             if (messageAleatoire == true && aleatoireAvecGerme == false){
+            	 //Source aléatoire sans seed
+            	 source = new SourceAleatoire(nbBitsMess);
+             }
+             if (messageAleatoire == true && aleatoireAvecGerme == true){
+            	 //Source aléatoire sans seed
+            	 source = new SourceAleatoire(nbBitsMess,seed);
+             }
+             if (messageAleatoire == false){
+            	 //Soruce fix
+            	 source = new SourceFixe(messageString);
+             }
+            
+             transmetteurAnalogique = new TransmetteurParfaitAnalogique();
+             destination = new DestinationFinale();
+             emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
+             source.connecter(transmetteurLogique);
+             transmetteurLogique.connecter(destination);
+             if(affichage == true){
+            	 //Avec sonde
+            	 SondeLogique soundeLogique1 = new SondeLogique("Sonde1",1920);
+            	 SondeLogique soundeLogique2 = new SondeLogique("Sonde2",1920);
+                 source.connecter(soundeLogique1);
+                 transmetteurLogique.connecter(soundeLogique2);       	 
+             }
+             
+         //Signal logique
+         else if (forme == null){
+             if (messageAleatoire == true && aleatoireAvecGerme == false){
+            	 //Source aléatoire sans seed
+            	 source = new SourceAleatoire(nbBitsMess);
+             }
+             if (messageAleatoire == true && aleatoireAvecGerme == true){
+            	 //Source aléatoire sans seed
+            	 source = new SourceAleatoire(nbBitsMess,seed);
+             }
+             if (messageAleatoire == false){
+            	 //Soruce fix
+            	 source = new SourceFixe(messageString);
+             }
+             
+             transmetteurLogique = new TransmetteurParfaitLogique();
+             destination = new DestinationFinale();
+             source.connecter(transmetteurLogique);
+             transmetteurLogique.connecter(destination);
+             if(affichage == true){
+            	 //Avec sonde
+            	 SondeLogique soundeLogique1 = new SondeLogique("Sonde1",1920);
+            	 SondeLogique soundeLogique2 = new SondeLogique("Sonde2",1920);
+                 source.connecter(soundeLogique1);
+                 transmetteurLogique.connecter(soundeLogique2);       	 
+             }
+         }
+
+         }
          
-         if (messageAleatoire == true && aleatoireAvecGerme == false){
-        	 //Source aléatoire sans seed
-        	 source = new SourceAleatoire(nbBitsMess);
-         }
-         if (messageAleatoire == true && aleatoireAvecGerme == true){
-        	 //Source aléatoire sans seed
-        	 source = new SourceAleatoire(nbBitsMess,seed);
-         }
-         if (messageAleatoire == false){
-        	 //Soruce fix
-        	 source = new SourceFixe(messageString);
-         }
          
-         transmetteurLogique = new TransmetteurParfaitLogique();
-         destination = new DestinationFinale();
-         source.connecter(transmetteurLogique);
-         transmetteurLogique.connecter(destination);
-         if(affichage == true){
-        	 //Avec sonde
-        	 SondeLogique soundeLogique1 = new SondeLogique("Sonde1",1920);
-        	 SondeLogique soundeLogique2 = new SondeLogique("Sonde2",1920);
-             source.connecter(soundeLogique1);
-             transmetteurLogique.connecter(soundeLogique2);       	 
-         }
+         
+         
+         
+         
+
      		
       }
 
