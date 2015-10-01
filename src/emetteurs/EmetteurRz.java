@@ -46,7 +46,7 @@ public class EmetteurRz extends Transmetteur<Boolean, Float> {
 				 for(int j=0; j<nbEch/3; j++){
 					 informationEmise.add(ampMin);
 				 }
-				 for(int j =nbEch; j<nbEch*2/3; j++){
+				 for(int j =nbEch/3; j<nbEch*2/3; j++){
 					 informationEmise.add(ampMax);
 				 }
 				 for(int j =nbEch*2/3; j<nbEch; j++){
