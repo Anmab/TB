@@ -46,29 +46,22 @@ public class RecepteurNrz extends Transmetteur<Float,Boolean>
 	 	  else
 	 		 for (int i=0; i<informationRecue.nbElements();i++) 
 	 		 {
-				 if(informationRecue.iemeElement(i) == 1.0)
-				 {
-					 for(int j =0; j<nbEch; j++)
-					 {
+				 if(informationRecue.iemeElement(i) == 1.0) {
+					 for(int j =0; j<nbEch; j++) {
 						 informationEmise.add(true);
 					 }
 				 }
-				 else{
-					 for(int j =0; j<nbEch; j++)
-					 {
+				 else {
+					 for(int j =0; j<nbEch; j++) {
 						 informationEmise.add(false);
 					 }
 				 }
 	 		  }
 
-	 		 // this.informationEmise = informationRecue;
-
 			 for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
 			 {
 	 			  destinationConnectee.recevoir(informationEmise);
-		
 			 }
-
 	 	  }
 }
 
