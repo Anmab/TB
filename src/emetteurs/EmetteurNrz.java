@@ -28,17 +28,22 @@ public class EmetteurNrz extends Transmetteur<Boolean,Float>{
 			throw new InformationNonConforme("Erreur : Information non conforme");
  	  else{
 
- 		  this.informationEmise = informationRecue;
-
-		 for (DestinationInterface <Float> destinationConnectee : destinationsConnectees) {
- 			  destinationConnectee.recevoir(informationEmise);
+		 for (int i=0; i<informationRecue.nbElements();i++) {
+			 int nbEchanSymbole = 30;
+			 Float amplitudeMax = (float)1;
+			 Float amplitudeMin = (float)-1;
+			 if(informationRecue.iemeElement(i) == true){
+				 for(int j =0; j<nbEchanSymbole; j++){
+					 informationEmise.add(amplitudeMax);
+				 }
+			 }
+			 else{
+				 for(int j =0; j<nbEchanSymbole; j++){
+					 informationEmise.add(amplitudeMin);
+				 }
+			 }
  		  }
- 		  
- 		  
- 		  
- 		  
- 		  
- 		  
+ 		  		  
  		  for (DestinationInterface <Float> destinationConnectee : destinationsConnectees) {
  			  destinationConnectee.recevoir(informationEmise);
  		  }
