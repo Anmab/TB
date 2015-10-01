@@ -121,7 +121,7 @@ public class SimulateurTest {
 		}
 	@Test
 	public void testArg9() {
-	  String invalideOptions1[] = {"-form"};
+	  String invalideOptions1[] = {"-form",""};
 	  try {
 		  simulateur = new Simulateur(invalideOptions1);
 	  } catch (ArgumentsException e) {
@@ -191,7 +191,7 @@ public class SimulateurTest {
 			}
 	@Test
 	public void testArg16() {
-		  String invalideOptions1[] = {"-ampl","3"};
+		  String invalideOptions1[] = {"-ampl","3"," "};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
 		  } catch (ArgumentsException e) {
@@ -199,6 +199,7 @@ public class SimulateurTest {
 		  }
 		  collector.checkThat(valider(validite),is(true));
 			}
+	
 	@Test
 	public void testTP1() throws Exception{
 		System.out.println("Tests du Simulateur :");
