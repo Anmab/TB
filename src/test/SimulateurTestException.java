@@ -7,7 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
-
 public class SimulateurTestException {
 	private Simulateur simulateur = null;
 	private boolean validite = false;
@@ -29,13 +28,11 @@ public class SimulateurTestException {
 			validite = false;
 		}
 	
-	//Test des arguments invalide
 	/**
 	 * Test sans argument
 	 */
-	
 	@Test
-	public void testArg() {
+	public void testArgNull() {
 	  String invalideOptions1[] = {" "};
 	  try {
 		  simulateur = new Simulateur(invalideOptions1);
@@ -44,6 +41,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 	}
+	
 	/**
 	 * argument non valide sdfqsdf
 	 */
