@@ -10,7 +10,12 @@ public class RecepteurRz extends Transmetteur<Float,Boolean>
 	private int nbEch ;
 	private float ampMin;
 	private float ampMax;
-
+	/**
+	 *    @param nbEch  nombre d'échantillon
+	 *    @param ampMin  amplitude minimale
+	 *    @param ampMax  amplitude maximale  
+	 */   
+	
 	public RecepteurRz(int nbEch, float ampMin, float ampMax)	
 	{
 		super();
@@ -19,7 +24,12 @@ public class RecepteurRz extends Transmetteur<Float,Boolean>
 		this.ampMax = ampMax;
 	}
 
-	
+	   /**
+	    * reçoit une information. 
+		 * Cette méthode, en fin d'exécution, appelle la méthode émettre.
+	    * @param information  l'information  ré�ue
+	    * @throws InformationNonConforme si un informationRecue est "null"
+	    */
 	@Override
 	public void recevoir(Information<Float> information) throws InformationNonConforme 
 	{
@@ -31,6 +41,10 @@ public class RecepteurRz extends Transmetteur<Float,Boolean>
 		emettre();
 
 	}
+	/**
+	 * Transforme une information analogique (Information<Float>) en information logique
+	 * Au millieu d'un symbole, on test sa valeur pour déterminé la nature de l'information
+	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
 		Information informationEmise = new Information() ;
