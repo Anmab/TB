@@ -39,7 +39,7 @@ public class RecepteurRz extends Transmetteur<Float,Boolean>
 		  
 	 	  else {
 	 		 for (int i=nbEch/2; i<informationRecue.nbElements();i+=nbEch){
-	 			 if (informationRecue.iemeElement(i) >= (ampMax+ampMin / 2)){
+	 			 if (informationRecue.iemeElement(i) >= ((ampMax+ampMin) / 2)){
 	 				informationEmise.add(true);
 	 			 }
 	 			 else{
