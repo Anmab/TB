@@ -70,6 +70,7 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 					 informationEmise.add(ampMax);
 				 }
 				 for(int j =nbEch*2/3; j<nbEch; j++){
+
 					 informationEmise.add((coef2)*j+(3*ampMax-2*ampMin));
 				 }
 			 }

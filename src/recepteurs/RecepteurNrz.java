@@ -4,6 +4,7 @@ import destinations.DestinationInterface;
 import information.Information;
 import information.InformationNonConforme;
 import transmetteurs.Transmetteur;
+import java.math.*;
 
 public class RecepteurNrz extends Transmetteur<Float,Boolean> 
 {
@@ -37,8 +38,9 @@ public class RecepteurNrz extends Transmetteur<Float,Boolean>
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  
 	 	  else {
+	 		  
 	 		 for (int i=nbEch/2; i<informationRecue.nbElements();i+=nbEch){
-	 			 if (informationRecue.iemeElement(i) >= (ampMax-ampMin / 2)){
+	 			 if ((informationRecue.iemeElement(i) >= (ampMax+ampMin)/ 2)){
 	 				informationEmise.add(true);
 	 			 }
 	 			 else{
