@@ -34,7 +34,8 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
  	  if (informationRecue == null)
 			throw new InformationNonConforme("Erreur : Information non conforme");
  	  else{
- 		  float coef = ((ampMax-ampMin)*3)/ nbEch;
+ 		 float coef = ((ampMax-ampMin)*3)/ nbEch;
+ 		 float coef2 =(3*(ampMin-ampMax))/nbEch;
  		 for (int i=0; i<informationRecue.nbElements();i++) {
 			 if(informationRecue.iemeElement(i) == true){
 				 for(int j=0; j<nbEch/3; j++){
@@ -44,7 +45,7 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 					 informationEmise.add(ampMax);
 				 }
 				 for(int j =nbEch*2/3; j<nbEch; j++){
-					 informationEmise.add((-coef)*j+3*(ampMax-ampMin));
+					 informationEmise.add((coef2)*j+(3*ampMax-2*ampMin));
 				 }
 			 }
 			 else{
