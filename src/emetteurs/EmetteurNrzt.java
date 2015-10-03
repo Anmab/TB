@@ -3,7 +3,6 @@ package emetteurs;
 /** La classe Emetteur NRZT permet d'emettre une suite de float selon une variante du code en ligne NRZ ( No Return to Zero) qui est NRZT (le symbole à plus la forme d'un trapèze, afin de se rapprocher de la réalité), vers le recepteur NRZ à travers un transmetteur analogique parfait.
  * @author DUNAN
  * @author SCHERRER
- *
  */
 
 import transmetteurs.Transmetteur;
@@ -15,12 +14,26 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 	private float ampMin;
 	private float ampMax;
 	
+	
+	/**
+	 *    @param nbEch  nombre d'échantillon
+	 *    @param ampMin  amplitude minimale
+	 *    @param ampMax  amplitude maximale  
+	 */   
+	
 	public EmetteurNrzt(int nbEch, float ampMin,float ampMax){
 		super();
 		this.nbEch = nbEch;
 		this.ampMin = ampMin;
 		this.ampMax = ampMax;
 	}
+	
+	 /**
+	 * reçoit une information. 
+	 * Cette méthode, en fin d'exécution, appelle la méthode émettre.
+	 * @param information  l'information  réçue
+	 * @throws InformationNonConforme si un informationRecue est "null"
+	 */
 	
     public void recevoir(Information <Boolean> information) throws InformationNonConforme {
  	   this.informationRecue = information;
@@ -37,7 +50,8 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
 	 * 			 ampMax entre nbEch/3 et (2*nbEch)/3  
 	 * 			 (coef2)*j+(3*ampMax-2*ampMin) entre (2*nbEch)/3 et nbEch
 	 * 
-	 *Si False : Ampmin
+	 *Si False : AmpMin
+	 *@throws InformationNonConforme si un informationRecue est "null"
 	 */
     
       public void emettre() throws InformationNonConforme{
