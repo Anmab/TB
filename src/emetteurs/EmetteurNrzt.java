@@ -1,5 +1,10 @@
 package emetteurs;
 
+/** La classe Emetteur NRZT permet d'emettre une suite de float selon une variante du code en ligne NRZ ( No Return to Zero) qui est NRZT (le symbole à plus la forme d'un trapèze, afin de se rapprocher de la réalité), vers le recepteur NRZ à travers un transmetteur analogique parfait.
+ * @author DUNAN
+ * @author SCHERRER
+ *
+ */
 
 import transmetteurs.Transmetteur;
 import destinations.DestinationInterface;
@@ -26,9 +31,15 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
   	  	emettre();
     }
     
-	 /**
-	 * met l'information construite par le transmetteur  
+	/**
+	 * Construction d'un symbole en fonction des élements reçus
+	 * Si True : (coef)*j+ampMin entre 0 et nbEch/3    
+	 * 			 ampMax entre nbEch/3 et (2*nbEch)/3  
+	 * 			 (coef2)*j+(3*ampMax-2*ampMin) entre (2*nbEch)/3 et nbEch
+	 * 
+	 *Si False : Ampmin
 	 */
+    
       public void emettre() throws InformationNonConforme{
     	  Information informationEmise = new Information() ;
  	  if (informationRecue == null)

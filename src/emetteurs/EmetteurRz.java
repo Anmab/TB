@@ -1,4 +1,11 @@
 package emetteurs;
+
+/** La classe Emetteur RZ permet d'emettre une suite de float selon le code en ligne RZ ( Return to Zero) vers le recepteur RZ à travers un transmetteur analogique parfait.
+ * @author DUNAN
+ * @author SCHERRER
+ *
+ */
+
 import transmetteurs.Transmetteur;
 import destinations.DestinationInterface;
 import information.*;
@@ -24,9 +31,16 @@ public class EmetteurRz extends Transmetteur<Boolean, Float> {
   	  	emettre();
     }
     
-	 /**
-	 * �met l'information construite par le transmetteur  
+    /**
+	 * Construction d'un symbole en fonction des élements reçus
+	 * Si True : ampMin entre 0 et nbEch/3
+	 * 			 ampMax entre nbEch/3 et nbEch*2/3
+	 * 			 ampMin entre nbEch*2/3 et nbEch
+	 * 
+	 * Si False : ampMin
+	 * 
 	 */
+    
       public void emettre() throws InformationNonConforme{
     	  Information informationEmise = new Information() ;
  	  if (informationRecue == null)

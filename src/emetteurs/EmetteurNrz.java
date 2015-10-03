@@ -4,6 +4,12 @@ import transmetteurs.Transmetteur;
 import destinations.DestinationInterface;
 import information.*;
 
+/** La classe Emetteur NRZ permet d'emettre une suite de float selon le code en ligne NRZ ( No Return to Zero) vers le recepteur NRZ à travers un transmetteur analogique parfait.
+ * @author DUNAN
+ * @author SCHERRER
+ *
+ */
+
 public class EmetteurNrz extends Transmetteur<Boolean,Float>{
 	private int nbEch ;
 	private float ampMin;
@@ -15,6 +21,8 @@ public class EmetteurNrz extends Transmetteur<Boolean,Float>{
 		this.ampMin = ampMin;
 		this.ampMax = ampMax;
 	}
+	
+	
     public void recevoir(Information <Boolean> information) throws InformationNonConforme {
  	   this.informationRecue = information;
   	  if (informationRecue == null)
@@ -24,9 +32,10 @@ public class EmetteurNrz extends Transmetteur<Boolean,Float>{
   	  	emettre();
     }
     
-	 /**
-	 * �met l'information construite par le transmetteur  
+	/**
+	 * Construction d'un symbole en fonction des élements reçus, ampMax si True et ampMin si False 
 	 */
+    
       public void emettre() throws InformationNonConforme{
     	  Information informationEmise = new Information() ;
  	  if (informationRecue == null)
