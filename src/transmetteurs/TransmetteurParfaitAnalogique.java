@@ -33,8 +33,8 @@ public class TransmetteurParfaitAnalogique extends Transmetteur <Float,Float>{
     		  /*
     		  Information informationEmise = new Information() ;
     		  for (int i = 0 ; i < informationRecue.nbElements(); i++)
-    			  informationEmise.add(true);
-    			  */
+    			  informationEmise.add(0);
+    			 */ 
     		  for (DestinationInterface <Float> destinationConnectee : destinationsConnectees) {
     			  destinationConnectee.recevoir(informationEmise);
     		  }
