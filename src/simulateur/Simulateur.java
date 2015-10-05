@@ -87,6 +87,7 @@ import recepteurs.*;
          
          //Connections
          if(forme=="non"){
+        	 // Logique
              source.connecter(transmetteurLogique);
              transmetteurLogique.connecter(destination);
              if(affichage==true){
@@ -97,6 +98,7 @@ import recepteurs.*;
              }
          }
          else{
+        	 // Analogique
         	 source.connecter(emetteur);
              emetteur.connecter(transmetteurAnalogique);
              transmetteurAnalogique.connecter(recepteur);
