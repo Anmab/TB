@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "###################################################################"
-echo "### FIP SIT213 : atelier logiciel : systèmes de transmission    ###"
-echo "### Chaîne transmission logique parfaite en Java séance 1       ###" 
-echo "### Antoine Dunan / Aymeric Scerrer                             ###" 
-echo "###################################################################"
+echo "#######################################################################"
+echo "### FIP SIT213 : atelier logiciel : systèmes de transmission        ###"
+echo "### Chaîne transmission logique parfaite en Java séance 1           ###" 
+echo "### Antoine Dunan / Aymeric Scerrer / Anaïs MABILLE / Sophie DANIEL ###" 
+echo "#######################################################################"
 echo
 echo "Compilation du programme ..."
 echo
