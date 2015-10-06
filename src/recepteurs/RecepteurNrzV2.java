@@ -54,13 +54,12 @@ public class RecepteurNrzV2 extends Transmetteur<Float,Boolean>
 		  if (informationRecue == null)
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  
-	 	  else {
+		  else {
 	 		 for (int symbole=0; symbole<informationRecue.nbElements();symbole+=nbEch){
 	 			 sommeEch=0;
 	 			 
 	 			for (int echantillon=symbole; echantillon<(symbole+nbEch);echantillon++){
 	 				sommeEch+=(informationRecue.iemeElement(echantillon));
-	 				System.out.println(echantillon);
 	 			}
 	 			
 	 			moyenneSymbole = sommeEch / nbEch;
