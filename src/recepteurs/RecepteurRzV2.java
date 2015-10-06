@@ -45,21 +45,35 @@ public class RecepteurRzV2 extends Transmetteur<Float,Boolean>
 	 * Transforme une information analogique (Information<Float>) en information logique
 	 * Au millieu d'un symbole, on test sa valeur pour déterminé la nature de l'information
 	 */
+	/**
+	 * Transforme une information analogique (Information<Float>) en information logique
+	 * Au millieu d'un symbole, on test sa valeur pour déterminé la nature de l'information
+	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
+		
+		float sommeEch=0;
+		float moyenneSymbole = 0;
+		
 		Information informationEmise = new Information() ;
 		  if (informationRecue == null)
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  
 	 	  else {
-	 		 for (int i=nbEch/2; i<informationRecue.nbElements();i+=nbEch){
-	 			 if (informationRecue.iemeElement(i) >= ((ampMax+ampMin) / 2)){
+	 		 for (int symbole=0; symbole<informationRecue.nbElements();symbole+=nbEch){
+	 			 sommeEch=0;
+	 			
+	 			for (int echantillon=(symbole+(nbEch/3)); echantillon<(symbole+(2*nbEch)/3);echantillon++){ 
+	 				sommeEch+=(informationRecue.iemeElement(echantillon));
+	 			}
+	 			moyenneSymbole = sommeEch/((1/3)*nbEch);
+	 			
+	 			if (moyenneSymbole >= (ampMax+ampMin)/2){
 	 				informationEmise.add(true);
-	 			 }
-	 			 else{
+	 			}
+	 			else{
 	 				informationEmise.add(false);
-	 			 }
-	 				 
+	 			}	 
 	 		 }
 	 	  }
 		    		  
@@ -69,4 +83,4 @@ public class RecepteurRzV2 extends Transmetteur<Float,Boolean>
  		  }
 	}
 }
-	
+		
