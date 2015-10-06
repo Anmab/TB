@@ -1,12 +1,12 @@
 #!/bin/bash
 echo "########################################################################"
-echo "### FIP SIT213 : atelier logiciel : systèmes de transmission    		###"
-echo "### Chaîne transmission logique parfaite en Java séance 1    	    ###" 
-echo "### Antoine Dunan / Aymeric Scherrer / Sophie Daniel / Anais Mabille ###" 
+echo "### FIP SIT213 : atelier logiciel : systemes de transmission    		###"
+echo "### Chaine transmission logique parfaite en Java séance 1    	    ###" 
+echo "### Antoine Dunan / Aymeric Scherrer / Sophie Daniel / Anais Mabille  ###" 
 echo "########################################################################"
 echo
 echo " TEST : "
-echo " Les tests ne sont pas compilé (src/test/SimulateurTest.java), neanmoins une serie non exhaustive de test va debuter. Fermez une sonde pour passe au test suivant"
+echo " Les tests ne sont pas compile (src/test/SimulateurTest.java), neanmoins une serie non exhaustive de test va debuter. Fermez une sonde pour passe au test suivant"
 cd ./bin/
 echo
 echo " -mess 010101010101 Signale determine sans sonde"

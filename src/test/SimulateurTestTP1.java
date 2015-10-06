@@ -13,7 +13,7 @@ public class SimulateurTestTP1 {
 
 	
 	/**
-	 *  Permet d'utilisé la fonction collector.checkThat(valider(thrown),is(true)); pour tester la levé d'exception
+	 *  Permet d'utiliser la fonction collector.checkThat(valider(thrown),is(true)); pour tester la levee d'exception
 	 * @param arg
 	 * @return
 	 */
