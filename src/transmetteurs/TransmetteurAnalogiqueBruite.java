@@ -47,7 +47,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur <Float,Float>{
 	        		  // Calcul de l'energie du signal 
 	        		  
 	        		  for(int i = 0 ; i<informationRecue.nbElements() ; i++) {
-	        			  energieSignal+=informationRecue.iemeElement(i);
+	        			  energieSignal+=Math.pow(informationRecue.iemeElement(i), 2);
 	        			  
 	        		  }
 	        		  
