@@ -55,28 +55,29 @@ public class RecepteurNrzV2 extends Transmetteur<Float,Boolean>
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  
 	 	  else {
-	 		  
 	 		 for (int symbole=0; symbole<informationRecue.nbElements();symbole+=nbEch){
 	 			 sommeEch=0;
-	 		 
+	 			 
 	 			for (int echantillon=symbole; echantillon<(symbole+nbEch);echantillon++){
 	 				sommeEch+=(informationRecue.iemeElement(echantillon));
+	 				System.out.println(echantillon);
 	 			}
 	 			
 	 			moyenneSymbole = sommeEch / nbEch;
-	 			
+
 	 			if (moyenneSymbole >= (ampMax+ampMin)/ 2){
 	 				informationEmise.add(true);
 	 			}
 	 			else{
 	 				informationEmise.add(false);
-	 			} // else
-	 		} // for	 
-	 	}// if 
+	 			}
+	 		} 	 
+	 	}
+
 	 	   		  
  		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) {
  			  destinationConnectee.recevoir(informationEmise);
  		  }
-	} // emettre
-}// EmetteurNrzV2
+	} 
+}
 	
