@@ -60,12 +60,11 @@ public class RecepteurNrztV2 extends Transmetteur<Float,Boolean>
 	 		 for (int symbole=0; symbole<informationRecue.nbElements();symbole+=nbEch){
 	 			 sommeEch=0;
 	 			
-	 			for (int echantillon=symbole+(1/3)*nbEch; echantillon<(symbole+(2/3)*nbEch);echantillon++){
+	 			for (int echantillon=(symbole+(1/3)*nbEch); echantillon<(symbole+(2/3)*nbEch);echantillon++){
 	 				sommeEch+=(informationRecue.iemeElement(echantillon));
-	 				System.out.println(echantillon);
 	 			}
 	 			
-	 			moyenneSymbole = (3*sommeEch) / nbEch;
+	 			moyenneSymbole = sommeEch/((1/3)*nbEch);
 	 			
 	 			if (moyenneSymbole >= (ampMax+ampMin)/ 2){
 	 				informationEmise.add(true);
