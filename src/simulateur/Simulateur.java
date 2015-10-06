@@ -205,7 +205,7 @@ import recepteurs.*;
             		forme = "RZ";
             	}
                 else 
-                    throw new ArgumentsException("Valeur du parametre -gorm invalide : " + args[i]);
+                    throw new ArgumentsException("Valeur du parametre -form invalide : " + args[i]);
             }
             
             else if (args[i].matches("-nbEch")){
@@ -239,14 +239,11 @@ import recepteurs.*;
             }
             else if (args[i].matches("-snr")){
             	i++;
-            	if (args[i].matches("[0-9]{1,5}")){
-            		snr = new Integer(args[i]);
-            		if(snr < 0){
-            			throw new ArgumentsException("Valeur du parametre -snr invalide : " + args[i]);
-            		}
+            	if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")){
+            		snr = new Float(args[i]);
             	}
             	else 
-                    throw new ArgumentsException("Valeur du parametre -nbEch invalide : " + args[i]);
+                    throw new ArgumentsException("Valeur du parametre -snr invalide : " + args[i]);
             }
             else throw new ArgumentsException("Option invalide :"+ args[i]);
          }
