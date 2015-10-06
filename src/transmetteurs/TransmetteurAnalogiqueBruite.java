@@ -44,24 +44,36 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur <Float,Float>{
 	        		  float energieSignal = 0;
 	        		  float puissanceSignal =0;
 	        		  
-	        		  // Calcul de l'energie du signal 
+	        		   /**
+	        		   * Calcul de l'énergie du signal
+	        		   **/
 	        		  
 	        		  for(int i = 0 ; i<informationRecue.nbElements() ; i++) {
 	        			  energieSignal+=Math.pow(informationRecue.iemeElement(i), 2);
 	        			  
 	        		  }
 	        		  
-	        		  // Calcul de la puissance du signal
+	        		   /**
+	        		   * Calcul de la puissance du signal 
+	        		   **/
 	        		  
 	        		  puissanceSignal = energieSignal/informationRecue.nbElements();
 	        		 
-	        		  // Calcul de la variance
+	        		   /**
+	        		   * Calcul de l'écart-type
+	        		   **/
 	        		  
 	        		  tau = (float) Math.sqrt(puissanceSignal/(Math.pow(10, (snr/10))));
 	        		  
 	        		  for(int i = 0 ; i<informationRecue.nbElements() ; i++) {
+	        			  
 	        			  a1= (float)Math.random();
 		        		  a2= (float)Math.random();
+		        		  
+		        		   /**
+		        		   * Ajout du bruit avec le signal recue 
+		        		   **/
+		        		  
 		        		  float b = (float)(tau*Math.sqrt((-2)*Math.log10(1-a1))*Math.cos(2*Math.PI*a2));
 	        			  informationEmise.add((float)informationRecue.iemeElement(i)+b);
 	        		  }
