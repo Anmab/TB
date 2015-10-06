@@ -59,7 +59,7 @@ public class RecepteurNrzV2 extends Transmetteur<Float,Boolean>
 	 		 for (int symbole=0; symbole<informationRecue.nbElements();symbole+=nbEch){
 	 			 sommeEch=0;
 	 		 
-	 			for (int echantillon=symbole; echantillon<symbole+nbEch;echantillon++){
+	 			for (int echantillon=symbole; echantillon<(symbole+nbEch);echantillon++){
 	 				sommeEch+=(informationRecue.iemeElement(symbole+echantillon));
 	 				moyenneSymbole = sommeEch / nbEch;
 	 				
