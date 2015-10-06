@@ -60,23 +60,23 @@ public class RecepteurNrzV2 extends Transmetteur<Float,Boolean>
 	 			 sommeEch=0;
 	 		 
 	 			for (int echantillon=symbole; echantillon<(symbole+nbEch);echantillon++){
-	 				sommeEch+=(informationRecue.iemeElement(symbole+echantillon));
+	 				sommeEch+=(informationRecue.iemeElement(symbole));
 	 			}
+	 			
 	 			moyenneSymbole = sommeEch / nbEch;
 	 			
-	 				if (moyenneSymbole >= (ampMax+ampMin)/ 2){
-	 					informationEmise.add(true);
-	 				}
-	 				else{
-	 					informationEmise.add(false);
-	 				}
-	 			}	 
-	 		 }
+	 			if (moyenneSymbole >= (ampMax+ampMin)/ 2){
+	 				informationEmise.add(true);
+	 			}
+	 			else{
+	 				informationEmise.add(false);
+	 			} // else
+	 		} // for	 
+	 	}// if 
 	 	   		  
- 		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) 
- 		  {
+ 		  for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) {
  			  destinationConnectee.recevoir(informationEmise);
  		  }
-	}
-}
+	} // emettre
+}// EmetteurNrzV2
 	
