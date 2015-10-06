@@ -65,8 +65,9 @@ public class RecepteurNrztV2 extends Transmetteur<Float,Boolean>
 	 			}
 	 			
 	 			moyenneSymbole = sommeEch/((1/3)*nbEch);
+	 			System.out.println(moyenneSymbole);
 	 			
-	 			if (moyenneSymbole >= (ampMax+ampMin)/ 2){
+	 			if (moyenneSymbole >= (ampMax+ampMin)/2){
 	 				informationEmise.add(true);
 	 			}
 	 			else{
