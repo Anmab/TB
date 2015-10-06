@@ -38,7 +38,9 @@ import recepteurs.*;
       private Transmetteur <Float, Float>  transmetteurAnalogique = null;/** le  composant Transmetteur parfait Analogique de la chaine de transmission */
       private Transmetteur <Boolean, Float> emetteur = null; /** le  composant emetteur parfait Analogique de la chaine de transmission */
       private Transmetteur <Float, Boolean> recepteur = null; /** le  composant recepteur parfait Analogique de la chaine de transmission */
-   
+      
+      // Signal bruité
+      private float snr = 0.0f; /** indique au Simulateur le rapport Signal sur bruit.*/
    /** Le constructeur de Simulateur construit une cha�ne de transmission compos�e d'une Source <Boolean>, d'une Destination <Boolean> et de Transmetteur(s) [voir la m�thode analyseArguments]...  
    * <br> Les diff�rents composants de la cha�ne de transmission (Source, Transmetteur(s), Destination, Sonde(s) de visualisation) sont cr��s et connect�s.
    * @param args le tableau des diff�rents arguments.
@@ -67,7 +69,10 @@ import recepteurs.*;
         	 transmetteurLogique = new TransmetteurParfaitLogique();
          }
          else{
-        	 transmetteurAnalogique = new TransmetteurParfaitAnalogique();
+        	 if(snr== 0)
+        		 transmetteurAnalogique = new TransmetteurParfaitAnalogique();
+        	 else
+        		 transmetteurAnalogique = new TransmetteurAnalogiqueBruite(snr);
          }
          //Destination
          destination = new DestinationFinale();
@@ -232,6 +237,17 @@ import recepteurs.*;
             		throw new ArgumentsException("Valeur du parametre -ampl invalide : " + args[i]);
             	}
             }
+            else if (args[i].matches("-snr")){
+            	i++;
+            	if (args[i].matches("[0-9]{1,5}")){
+            		snr = new Integer(args[i]);
+            		if(snr < 0){
+            			throw new ArgumentsException("Valeur du parametre -snr invalide : " + args[i]);
+            		}
+            	}
+            	else 
+                    throw new ArgumentsException("Valeur du parametre -nbEch invalide : " + args[i]);
+            }
             else throw new ArgumentsException("Option invalide :"+ args[i]);
          }
       
@@ -284,7 +300,7 @@ import recepteurs.*;
    */
       public static void main(String [] args) { 
     	  System.out.println("*********************************************************");
-    	  System.out.println("**            Simulateur-2000 Dunan Scherrer           **");
+    	  System.out.println("**                   Simulateur-2000                   **");
     	  System.out.println("*********************************************************");
           Simulateur simulateur = null;
       	
