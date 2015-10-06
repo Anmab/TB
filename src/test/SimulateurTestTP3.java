@@ -26,6 +26,10 @@ public class SimulateurTestTP3 {
 	public void setUp() throws Exception {
 
 	}
+	//dans les trois fonctions différentes le TEB pour un SNR sera toujours de 0. Nous ne pouvons tester que cette valeur
+	// car nous savons à l'avance le TEB qui correspond à ce SNR.
+	// Les tests suivants vont nous permettre de vérifier que même avec du bruit pour un SNR de 0 on aura un TEB de 0
+	
 	public void TestNRZBruite() throws Exception{
 			
 		System.out.println("Tests du Simulateur :");
