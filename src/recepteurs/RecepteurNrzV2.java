@@ -46,15 +46,24 @@ public class RecepteurNrzV2 extends Transmetteur<Float,Boolean>
  */
 	@Override
 	public void emettre() throws InformationNonConforme {
+		
+		float sommeEch=0;
+		float moyenneSymbole = 0;
+	
 		Information informationEmise = new Information() ;
 		  if (informationRecue == null)
 				throw new InformationNonConforme("Erreur : Information non conforme");
 		  
 	 	  else {
 	 		  
-	 		 for (int i=nbEch/3; i<informationRecue.nbElements();i+=nbEch){
-	 			for (int j=2*nbEch/3; j<informationRecue.nbElements();j+=nbEch){
-	 				if ((informationRecue.iemeElement(i) >= (ampMax+ampMin)/ 2)){
+	 		 for (int symbole=0; symbole<informationRecue.nbElements();symbole+=nbEch){
+	 			 sommeEch=0;
+	 		 
+	 			for (int echantillon=symbole; echantillon<symbole+nbEch;echantillon++){
+	 				sommeEch+=(informationRecue.iemeElement(symbole+echantillon));
+	 				moyenneSymbole = sommeEch / nbEch;
+	 				
+	 				if (moyenneSymbole >= (ampMax+ampMin)/ 2){
 	 					informationEmise.add(true);
 	 				}
 	 				else{
