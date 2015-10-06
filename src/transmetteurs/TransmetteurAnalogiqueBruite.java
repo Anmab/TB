@@ -32,19 +32,40 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur <Float,Float>{
 	        	  float a1=0;
 	        	  float a2=0;
 	        	  float tau=0;
+	        	 
 	        	  
 	        	  if (informationRecue == null)
-	      			throw new InformationNonConforme("Erreur : Information non conforme");
+	        		  throw new InformationNonConforme("Erreur : Information non conforme");
+	        	  
 	        	  else{ 
+	        		  
 	        		  informationEmise= new Information(); 
 	        		  
-	        		  for(int i =0 ; i<informationRecue.nbElements() ; i++) {
+	        		  float energieSignal = 0;
+	        		  float puissanceSignal =0;
+	        		  
+	        		  // Calcul de l'energie du signal 
+	        		  
+	        		  for(int i = 0 ; i<informationRecue.nbElements() ; i++) {
+	        			  energieSignal+=informationRecue.iemeElement(i);
+	        			  
+	        		  }
+	        		  
+	        		  // Calcul de la puissance du signal
+	        		  
+	        		  puissanceSignal = energieSignal/informationRecue.nbElements();
+	        		 
+	        		  // Calcul de la variance
+	        		  
+	        		  tau = (float) Math.sqrt(puissanceSignal/(Math.pow(10, (snr/10))));
+	        		  
+	        		  for(int i = 0 ; i<informationRecue.nbElements() ; i++) {
 	        			  a1= (float)Math.random();
 		        		  a2= (float)Math.random();
 		        		  float b = (float)(tau*Math.sqrt((-2)*Math.log10(1-a1))*Math.cos(2*Math.PI*a2));
 	        			  informationEmise.add((float)informationRecue.iemeElement(i)+b);
 	        		  }
-	        		
+	        
 	        		  for (DestinationInterface <Float> destinationConnectee : destinationsConnectees) {
 	        			  destinationConnectee.recevoir(informationEmise);
 	        		  }
