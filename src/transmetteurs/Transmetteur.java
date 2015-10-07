@@ -89,7 +89,9 @@ package transmetteurs;
     */
       public  abstract void emettre() throws InformationNonConforme; 
       
-      public  abstract LinkedList<Float> getBruit() ;  
+      public LinkedList<Float> getBruit(){
+    	  return null; 
+      }
    }
     
      

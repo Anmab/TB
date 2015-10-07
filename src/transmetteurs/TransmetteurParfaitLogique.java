@@ -1,15 +1,12 @@
 package transmetteurs;
-import java.util.LinkedList;
 
 import destinations.*;
 import information.*;
 
 
 public class TransmetteurParfaitLogique extends Transmetteur < Boolean , Boolean >{
-	private LinkedList<Float> signalBruite;
 	public TransmetteurParfaitLogique(){
 		super();
-		signalBruite =new LinkedList();
 	}
    /**
     * re�oit une information. 
@@ -43,8 +40,5 @@ public class TransmetteurParfaitLogique extends Transmetteur < Boolean , Boolean
     			  destinationConnectee.recevoir(informationEmise);
     		  }
     	  }
-	  }
-	  public LinkedList<Float> getBruit(){
-		  return null;
 	  }
 }
