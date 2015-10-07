@@ -78,9 +78,11 @@ public class Simulateur {
 	/** indique au Simulateur le rapport Signal sur bruit. */
 
 	private boolean test = false;
-
 	/** indique au Simulateur si il doit générer des fichier de test */
 
+	private boolean help = false;
+	/** indique au Simulateur si il doit afficher une page d'aide*/
+	
 	/**
 	 * Le constructeur de Simulateur construit une cha�ne de transmission
 	 * compos�e d'une Source <Boolean>, d'une Destination <Boolean> et de
@@ -322,6 +324,8 @@ public class Simulateur {
 							"Valeur du parametre -snr invalide : " + args[i]);
 			} else if (args[i].matches("-test")) {
 				test = true;
+			} else if (args[i].matches("-help|-h")) {
+				help = true;
 			} else
 				throw new ArgumentsException("Option invalide :" + args[i]);
 		}
@@ -394,7 +398,6 @@ public class Simulateur {
 		// retourne le TEB
 		return ((float) nbBitFaux / (float) messageON.nbElements());
 	}
-
 	/**
 	 * La fonction main instancie un Simulateur � l'aide des arguments
 	 * param�tres et affiche le r�sultat de l'ex�cution d'une transmission.
@@ -418,7 +421,10 @@ public class Simulateur {
 			System.out.println(e);
 			System.exit(-1);
 		}
-
+		if (simulateur.help == true){
+			Help help = new Help();
+		}
+		else{
 		try {
 			simulateur.execute();
 			float tauxErreurBinaire = simulateur.calculTauxErreurBinaire();
@@ -427,10 +433,12 @@ public class Simulateur {
 				s += args[i] + "  ";
 			}
 			System.out.println(s + "  =>   TEB : " + tauxErreurBinaire);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 			e.printStackTrace();
 			System.exit(-2);
+		}
 		}
 	}
 }
