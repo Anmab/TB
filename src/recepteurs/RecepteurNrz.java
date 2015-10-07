@@ -4,7 +4,9 @@ import destinations.DestinationInterface;
 import information.Information;
 import information.InformationNonConforme;
 import transmetteurs.Transmetteur;
+
 import java.math.*;
+import java.util.LinkedList;
 
 public class RecepteurNrz extends Transmetteur<Float,Boolean> 
 {
@@ -67,6 +69,8 @@ public class RecepteurNrz extends Transmetteur<Float,Boolean>
  		  {
  			  destinationConnectee.recevoir(informationEmise);
  		  }
-	}
+	}	  public LinkedList<Float> getBruit(){
+		  return null;
+	  }
 }
 	

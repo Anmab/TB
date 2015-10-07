@@ -1,5 +1,7 @@
 package emetteurs;
 
+import java.util.LinkedList;
+
 import transmetteurs.Transmetteur;
 import destinations.DestinationInterface;
 import information.*;
@@ -71,6 +73,10 @@ public class EmetteurNrz extends Transmetteur<Boolean,Float>{
  			  destinationConnectee.recevoir(informationEmise);
  		  }
  	  }
+ 	  
    }
+	  public LinkedList<Float> getBruit(){
+		  return null;
+	  }
 
 }

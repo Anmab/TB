@@ -1,5 +1,7 @@
 package recepteurs;
 
+import java.util.LinkedList;
+
 import information.Information;
 import information.InformationNonConforme;
 import transmetteurs.Transmetteur;
@@ -78,7 +80,9 @@ public class RecepteurNrztV2 extends Transmetteur<Float,Boolean>
  		  {
  			  destinationConnectee.recevoir(informationEmise);
  		  }
-	}
+	}	  public LinkedList<Float> getBruit(){
+		  return null;
+	  }
 }
 	
 

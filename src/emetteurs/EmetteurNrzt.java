@@ -5,6 +5,8 @@ package emetteurs;
  * @author SCHERRER
  */
 
+import java.util.LinkedList;
+
 import transmetteurs.Transmetteur;
 import destinations.DestinationInterface;
 import information.*;
@@ -86,5 +88,8 @@ public class EmetteurNrzt extends Transmetteur<Boolean,Float>{
  		  }
  	  }
    }
+	  public LinkedList<Float> getBruit(){
+		  return null;
+	  }
 
 }

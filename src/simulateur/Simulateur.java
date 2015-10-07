@@ -5,7 +5,12 @@ import destinations.*;
 import transmetteurs.*;
 import information.*;
 import visualisations.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.Math;
+
 import emetteurs.*;
 import recepteurs.*;
 
@@ -18,29 +23,32 @@ import recepteurs.*;
  */
    public class Simulateur {
       	
-      private boolean affichage = false; /** indique si le Simulateur utilise des sondes d'affichage */
-      private boolean messageAleatoire = true; /** indique si le Simulateur utilise un message g�n�r� de mani�re al�atoire */ 
-      private boolean aleatoireAvecGerme = false;   /** indique si le Simulateur utilise un germe pour initialiser les g�n�rateurs al�atoires */
-      private Integer seed = null;   /** la valeur de la semence utilis�e pour les g�n�rateurs al�atoires */
-      private int nbBitsMess = 100; /** la longueur du message al�atoire � transmettre si un message n'est pas impose */
-      private String messageString = "100";   /** la cha�ne de caract�res correspondant � m dans l'argument -mess m */
-   	
-      private Source <Boolean>  source = null; /** le  composant Source de la chaine de transmission */
-      private Transmetteur <Boolean, Boolean>  transmetteurLogique = null;/** le  composant Transmetteur parfait logique de la chaine de transmission */
-      private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
-      
-      // Analogique
-      private String forme = "non"; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
-      private Integer nbEch =30 ; /** indique au Simulateur le nombre d'echantillons utilisé par symbole*/
-      private float amplMin = 0.0f; /** indique au Simulateur l'amplitude min du signal */
-      private float amplMax = 1.0f; /** indique au Simulateur l'amplitude max du signal */
-    
-      private Transmetteur <Float, Float>  transmetteurAnalogique = null;/** le  composant Transmetteur parfait Analogique de la chaine de transmission */
-      private Transmetteur <Boolean, Float> emetteur = null; /** le  composant emetteur parfait Analogique de la chaine de transmission */
-      private Transmetteur <Float, Boolean> recepteur = null; /** le  composant recepteur parfait Analogique de la chaine de transmission */
-      
-      // Signal bruité
-      private float snr = 0.0f; /** indique au Simulateur le rapport Signal sur bruit.*/
+	  private boolean affichage = false; /** indique si le Simulateur utilise des sondes d'affichage */
+	  private boolean messageAleatoire = true; /** indique si le Simulateur utilise un message g�n�r� de mani�re al�atoire */ 
+	  private boolean aleatoireAvecGerme = false;   /** indique si le Simulateur utilise un germe pour initialiser les g�n�rateurs al�atoires */
+	  private Integer seed = null;   /** la valeur de la semence utilis�e pour les g�n�rateurs al�atoires */
+	  private int nbBitsMess = 100; /** la longueur du message al�atoire � transmettre si un message n'est pas impose */
+	  private String messageString = "100";   /** la cha�ne de caract�res correspondant � m dans l'argument -mess m */
+	
+	  private Source <Boolean>  source = null; /** le  composant Source de la chaine de transmission */
+	  private Transmetteur <Boolean, Boolean>  transmetteurLogique = null;/** le  composant Transmetteur parfait logique de la chaine de transmission */
+	  private Destination <Boolean>  destination = null; /** le  composant Destination de la chaine de transmission */
+	  
+	  // Analogique
+	  private String forme = "non"; /** indique au Simulateur le type de de forme d'aude utilisé null si le signal est logique NRZ NRZT RZ */
+	  private Integer nbEch =30 ; /** indique au Simulateur le nombre d'echantillons utilisé par symbole*/
+	  private float amplMin = 0.0f; /** indique au Simulateur l'amplitude min du signal */
+	  private float amplMax = 1.0f; /** indique au Simulateur l'amplitude max du signal */
+	
+	  private Transmetteur <Float, Float>  transmetteurAnalogique = null;/** le  composant Transmetteur parfait Analogique de la chaine de transmission */
+	  private Transmetteur <Boolean, Float> emetteur = null; /** le  composant emetteur parfait Analogique de la chaine de transmission */
+	  private Transmetteur <Float, Boolean> recepteur = null; /** le  composant recepteur parfait Analogique de la chaine de transmission */
+	  
+	  // Signal bruité
+	  private float snr = 0.0f; /** indique au Simulateur le rapport Signal sur bruit.*/
+	   
+	  private boolean test = false; /** indique au Simulateur si il doit générer des fichier de test*/
+     
    /** Le constructeur de Simulateur construit une cha�ne de transmission compos�e d'une Source <Boolean>, d'une Destination <Boolean> et de Transmetteur(s) [voir la m�thode analyseArguments]...  
    * <br> Les diff�rents composants de la cha�ne de transmission (Source, Transmetteur(s), Destination, Sonde(s) de visualisation) sont cr��s et connect�s.
    * @param args le tableau des diff�rents arguments.
@@ -79,15 +87,15 @@ import recepteurs.*;
          //emmeteur-recepteurs
          if(forme=="NRZ"){
         	 emetteur = new EmetteurNrz(nbEch,amplMin,amplMax);
-             recepteur = new RecepteurNrzV2(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurNrz(nbEch,amplMin,amplMax);
          }
          if (forme=="RZ"){
         	 emetteur = new EmetteurRz(nbEch,amplMin,amplMax);
-             recepteur = new RecepteurRzV2(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurRz(nbEch,amplMin,amplMax);
          }
          if (forme=="NRZT"){
         	 emetteur = new EmetteurNrzt(nbEch,amplMin,amplMax);
-             recepteur = new RecepteurNrztV2(nbEch,amplMin,amplMax);
+             recepteur = new RecepteurNrzt(nbEch,amplMin,amplMax);
          }
          
          //Connections
@@ -245,6 +253,9 @@ import recepteurs.*;
             	else 
                     throw new ArgumentsException("Valeur du parametre -snr invalide : " + args[i]);
             }
+            else if (args[i].matches("-test")){
+            	test=true;
+            }
             else throw new ArgumentsException("Option invalide :"+ args[i]);
          }
       
@@ -260,7 +271,32 @@ import recepteurs.*;
    */ 
       public void execute() throws Exception {      
          source.emettre(); 
-      	     	      
+         if (test){
+        	 if (transmetteurAnalogique != null){
+                 if (transmetteurAnalogique.getBruit() != null){
+    	             File f = new File ("../testBruit.csv");
+    	             
+    	             try
+    	             {
+    	                 FileWriter fw = new FileWriter (f);
+    	              
+    	                 for(int i =1; i<transmetteurAnalogique.getBruit().size()-1; i++)
+    	                 {
+    	                     fw.write (String.valueOf (transmetteurAnalogique.getBruit().get(i)));
+    	                     fw.write ("\r\n");
+    	                 }
+    	              
+    	                 fw.close();
+    	             }
+    	             catch (IOException exception)
+    	             {
+    	                 System.out.println ( "Erreur lors de la lecture : " + exception.getMessage());
+    	             }
+                 }
+             }
+         }
+         
+
       }
    
    	   	/**
