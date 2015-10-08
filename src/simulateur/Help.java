@@ -58,6 +58,6 @@ public class Help {
   System.out.println("premet d'afficher ce messge d'aide");
   System.out.println();
   System.out.println("-test");
-  System.out.println("permet de générer un fichier .csv qui contien les échantillion du buit généger par le simulateur ne fonctionne que lorsque la transmission est bruité");
+  System.out.println("Permets de générer un fichier .Csv qui contient les échantillons du buit généger par le simulateur ne fonctionne que lorsque la transmission est bruitée");
  }
 }
