@@ -6,6 +6,7 @@ import transmetteurs.*;
 import information.*;
 import visualisations.*;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -128,15 +129,15 @@ public class Simulateur {
 		// emmeteur-recepteurs
 		if (forme == "NRZ") {
 			emetteur = new EmetteurNrz(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurNrz(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurNrz(nbEch, amplMin, amplMax);//recepteur = new RecepteurNrzV2(nbEch, amplMin, amplMax);
 		}
 		if (forme == "RZ") {
 			emetteur = new EmetteurRz(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurRz(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurRz(nbEch, amplMin, amplMax);//recepteur = new RecepteurRzV2(nbEch, amplMin, amplMax);
 		}
 		if (forme == "NRZT") {
 			emetteur = new EmetteurNrzt(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurNrzt(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurNrzt(nbEch, amplMin, amplMax);//recepteur = new RecepteurNrztV2(nbEch, amplMin, amplMax);
 		}
 
 		// Connections
@@ -425,20 +426,36 @@ public class Simulateur {
 			Help help = new Help();
 		}
 		else{
-		try {
-			simulateur.execute();
-			float tauxErreurBinaire = simulateur.calculTauxErreurBinaire();
-			String s = "java  Simulateur  ";
-			for (int i = 0; i < args.length; i++) {
-				s += args[i] + "  ";
+			try {
+				simulateur.execute();
+				float tauxErreurBinaire = simulateur.calculTauxErreurBinaire();
+				String s = "java  Simulateur  ";
+				for (int i = 0; i < args.length; i++) {
+					s += args[i] + "  ";
+				}
+				System.out.println(s + "  =>   TEB : " + tauxErreurBinaire);
+				if(simulateur.test){
+					try {
+						String TEBstring = String.valueOf(tauxErreurBinaire);
+					    BufferedWriter out = new BufferedWriter(new FileWriter("../TEB.csv", true));
+					    out.write(simulateur.snr +";"+simulateur.forme+";"+ TEBstring+"\r\n");
+					    out.close();
+					}
+					catch (IOException exception) {
+						System.out.println("Erreur lors de l'écriture de TEB : "
+								+ exception.getMessage());
+					
+					}
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				e.printStackTrace();
+				System.exit(-2);
 			}
-			System.out.println(s + "  =>   TEB : " + tauxErreurBinaire);
 			
-		} catch (Exception e) {
-			System.out.println(e);
-			e.printStackTrace();
-			System.exit(-2);
-		}
+			  
+			
 		}
 	}
 }
