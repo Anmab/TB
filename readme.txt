@@ -11,7 +11,7 @@ Compilation du programme :
 
 Simulation du programme : 
 	Toujours dans le dossier où se trouvent les sources et les scripts, effectuez la commande :
-	SIT213$ ./Simulateur.sh [-options : voir PDF "commande_unique_2015" disponible dans le dossier pour plus d'informations sur les commandes disponibles"]
+	SIT213$ ./Simulateur.sh [-options : entrez -help pour voir les informations sur les commandes disponibles"]
 
 Jeux de tests : 
 	Toujours dans le dossier où se trouvent les sources et les scripts, effectuez la commande :
