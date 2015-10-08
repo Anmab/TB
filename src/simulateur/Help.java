@@ -2,13 +2,14 @@ package simulateur;
 
 public class Help {
  public Help(){
-  System.out.println("HELP");
   System.out.println("Ce document récapitule les modalités d'invocation du simulateur, afin d'harmoniser l'utilisation des simulateurs rendus par les différentes équipes. La documentation ci-dessous est fournie se lon le modèle de pages man Linux.");
   System.out.println("SIMULATEUR(1)");
   System.out.println("NAME");
   System.out.println("simulateur – Simulation de la transmission d'un message numérique.");
+  System.out.println();
   System.out.println("SYNOPSIS");
   System.out.println("java Simulateur [...]");
+  System.out.println();
   System.out.println("DESCRIPTION");
   System.out.println("Il s'agit de simuler la transmission d'un message numérique (train de bits 0 ou 1) dans un système de transmission entre un point d’entrée jusqu'à un point de sortie,via un canal de transmission (ou de communication).Les nombreux paramètres de la simulation permettent de choisir les caractéristiques du message à trans mettre, du canal de propagation et du système de transmission.");
   System.out.println("Le résultat de la simulation est la valeur du taux,d’erreur binaire de la transmission totale (TEB). Les graphiques reproduisant le signal à différents étages du système de transmission (si option –s ) sont assimilables à des résultats.");
