@@ -1,7 +1,7 @@
 %----------------------------------------------- readme.txt ----------------------------------------------------%
 %	 Auteurs :  - DANIEL																						
 %		    - DUNAN				Fichier text expliquant les étapes à suivre afin	
-%		    - MABILLE				de compiler le programme, simuler le programme.		
+%		    - MABILLE			de compiler le programme, simuler le programme.		
 %		    - SCHERRER											
 %---------------------------------------------------------------------------------------------------------------%
 
