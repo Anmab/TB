@@ -348,7 +348,7 @@ public class Simulateur {
 		if (test) {
 			if (transmetteurAnalogique != null) {
 				if (transmetteurAnalogique.getBruit() != null) {
-					File f = new File("../testBruit.csv");
+					File f = new File("../test/Bruit.csv");
 					try {
 						FileWriter fw = new FileWriter(f);
 
@@ -437,7 +437,7 @@ public class Simulateur {
 				if(simulateur.test){
 					try {
 						String TEBstring = String.valueOf(tauxErreurBinaire);
-					    BufferedWriter out = new BufferedWriter(new FileWriter("../TEB.csv", true));
+					    BufferedWriter out = new BufferedWriter(new FileWriter("../test/TEB.csv", true));
 					    out.write(simulateur.snr +";"+simulateur.forme+";"+ TEBstring+"\r\n");
 					    out.close();
 					}
