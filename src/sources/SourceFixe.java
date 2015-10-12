@@ -11,7 +11,7 @@ public class SourceFixe extends	Source<Boolean>{
     	this.informationGeneree  = info;
     }
     /**
-     * Constructeur de SourceFix a partir d'une chaine de caractaire
+     * Constructeur de SourceFix a partir d'une chaine de caractere
      * @param messageString
      */
     public SourceFixe (String messageString) {

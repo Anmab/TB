@@ -11,11 +11,11 @@ public class TransmetteurParfaitAnalogique extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * re�oit une information. Cette m�thode, en fin d'ex�cution, appelle la
-	 * m�thode �mettre.
+	 * recoit une information. Cette methode, en fin d'execution, appelle la
+	 * methode emettre.
 	 * 
 	 * @param information
-	 *            l'information re�ue
+	 *            l'information recue
 	 */
 	public void recevoir(Information<Float> information)
 			throws InformationNonConforme {
@@ -29,7 +29,7 @@ public class TransmetteurParfaitAnalogique extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * �met l'information construite par le transmetteur
+	 * Emet l'information construite par le transmetteur
 	 */
 	public void emettre() throws InformationNonConforme {
 		if (informationRecue == null)

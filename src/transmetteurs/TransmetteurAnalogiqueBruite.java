@@ -17,11 +17,11 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * re�oit une information. Cette m�thode, en fin d'ex�cution, appelle la
-	 * m�thode �mettre.
+	 * recoit une information. Cette methode, en fin d'execution, appelle la
+	 * methode emettre.
 	 * 
 	 * @param information
-	 *            l'information re�ue
+	 *            l'information recue
 	 */
 	public void recevoir(Information<Float> information)
 			throws InformationNonConforme {
@@ -35,7 +35,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * �met l'information construite par le transmetteur
+	 * Emet l'information construite par le transmetteur
 	 */
 	public void emettre() throws InformationNonConforme {
 		float a1 = 0;
@@ -55,7 +55,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 			float puissanceSignal = 0;
 
 			/**
-			 * Calcul de l'énergie du signal
+			 * Calcul de l'energie du signal
 			 **/
 
 			for (int i = 0; i < informationRecue.nbElements(); i++) {
@@ -70,7 +70,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 			puissanceSignal = energieSignal / informationRecue.nbElements();
 
 			/**
-			 * Calcul de l'écart-type
+			 * Calcul de l'ecart-type
 			 **/
 
 			tau = (float) Math.sqrt(puissanceSignal
@@ -99,6 +99,9 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 		}
 	}
 
+	/**
+	 * Fonction permettant de recuperer le signal bruite
+	 */
 	public LinkedList<Float> getBruit() {
 		return signalBruite;
 	}

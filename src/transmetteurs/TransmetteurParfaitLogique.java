@@ -8,11 +8,13 @@ public class TransmetteurParfaitLogique extends Transmetteur < Boolean , Boolean
 	public TransmetteurParfaitLogique(){
 		super();
 	}
-   /**
-    * re�oit une information. 
-	 * Cette m�thode, en fin d'ex�cution, appelle la m�thode �mettre.
-    * @param information  l'information  re�ue
-    */
+	/**
+	 * recoit une information. Cette methode, en fin d'execution, appelle la
+	 * methode emettre.
+	 * 
+	 * @param information
+	 *            l'information recue
+	 */
        public void recevoir(Information <Boolean> information) throws InformationNonConforme {
     	   this.informationRecue = information;
      	  if (informationRecue == null)
@@ -22,7 +24,7 @@ public class TransmetteurParfaitLogique extends Transmetteur < Boolean , Boolean
      	  	emettre();
        }
     /**
-    * �met l'information construite par le transmetteur  
+    * Emet l'information construite par le transmetteur  
     */
       public void emettre() throws InformationNonConforme{
     	  if (informationRecue == null)

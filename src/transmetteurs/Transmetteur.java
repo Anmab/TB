@@ -7,9 +7,9 @@ package transmetteurs;
    import java.util.*;
 
 /** 
- * Classe Abstraite d'un composant transmetteur d'informations dont les �l�ments sont de type R en entr�e et de type E en sortie;
- * l'entr�e du transmetteur impl�mente l'interface DestinationInterface, 
- * la sortie du transmetteur impl�mente l'interface SourceInterface
+ * Classe Abstraite d'un composant transmetteur d'informations dont les elements sont de type R en entree et de type E en sortie;
+ * l'entree du transmetteur implemente l'interface DestinationInterface, 
+ * la sortie du transmetteur implemente l'interface SourceInterface
  * @author prou
  */
     public abstract  class Transmetteur <R,E> implements  DestinationInterface <R>, SourceInterface <E> {
@@ -50,7 +50,7 @@ package transmetteurs;
       }
 
    /**
-    * retourne la derni�re information �mise en sortie du transmetteur
+    * retourne la derni�re information emise en sortie du transmetteur
 	 * @return une information   
     */
        public Information <E>  getInformationEmise() {
@@ -59,8 +59,8 @@ package transmetteurs;
  
 
    /**
-    * connecte une  destination � la sortie du transmetteur 
-    * @param destination  la destination � connecter
+    * connecte une  destination a la sortie du transmetteur 
+    * @param destination  la destination a connecter
 	 */
        public void connecter (DestinationInterface <E> destination) {
          destinationsConnectees.add(destination); 
@@ -68,24 +68,26 @@ package transmetteurs;
 
    
    /**
-    * d�connecte une  destination de la la sortie du transmetteur 
-    * @param destination  la destination � d�connecter
+    * deconnecte une  destination de la la sortie du transmetteur 
+    * @param destination  la destination a deconnecter
     */
        public void deconnecter (DestinationInterface <E> destination) {
          destinationsConnectees.remove(destination); 
       }
 
    	    
-   /**
-    * re�oit une information. 
-	 * Cette m�thode, en fin d'ex�cution, appelle la m�thode �mettre.
-    * @param information  l'information  re�ue
-    */
+   	/**
+   	 * recoit une information. Cette methode, en fin d'execution, appelle la
+   	 * methode emettre.
+   	 * 
+   	 * @param information
+   	 *            l'information recue
+   	 */
        public  abstract void recevoir(Information <R> information) throws InformationNonConforme;
       
    
     /**
-    * �met l'information construite par le transmetteur  
+    * Emet l'information construite par le transmetteur  
     */
       public  abstract void emettre() throws InformationNonConforme; 
       

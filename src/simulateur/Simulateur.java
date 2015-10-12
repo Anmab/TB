@@ -16,8 +16,8 @@ import emetteurs.*;
 import recepteurs.*;
 
 /**
- * La classe Simulateur permet de construire et simuler une cha�ne de
- * transmission compos�e d'une Source, d'un nombre variable de Transmetteur(s)
+ * La classe Simulateur permet de construire et simuler une chaine de
+ * transmission composee d'une Source, d'un nombre variable de Transmetteur(s)
  * et d'une Destination.
  * 
  * @author cousin
@@ -74,7 +74,7 @@ public class Simulateur {
 	private Transmetteur<Float, Boolean> recepteur = null;
 	/** le composant recepteur parfait Analogique de la chaine de transmission */
 
-	// Signal bruité
+	// Signal bruite
 	private float snr = 0.0f;
 	/** indique au Simulateur le rapport Signal sur bruit. */
 
