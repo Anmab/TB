@@ -12,7 +12,7 @@ public class SimulateurTestException {
 	private boolean validite = false;
 	
 	/**
-	 *  Permet d'utilisé la fonction collector.checkThat(valider(thrown),is(true)); pour tester la levé d'exception
+	 *  Permet d'utilisé la fonction collector.checkThat(valider(thrown),is(true)); pour tester la levée d'exception
 	 * @param arg
 	 * @return
 	 */
@@ -191,6 +191,54 @@ public class SimulateurTestException {
 	@Test
 	public void testArg16() {
 		  String invalideOptions1[] = {"-ampl","3"," "};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+			}
+	// Etape 4 
+	@Test
+	public void testArg17() {
+		  String invalideOptions1[] = {"-ti","6","5", "0.2f"}; 
+		  // test avec le paramètre i non compris entre 1 et 5
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+			}
+	
+	@Test
+	public void testArg18() {
+		  String invalideOptions1[] = {"-ti","0","5", "0.2f"}; 
+		  // test avec le paramètre i non compris entre 1 et 5
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+			}
+	
+	@Test
+	public void testArg19() {
+		  String invalideOptions1[] = {"-ti","2","5.3f", "0.2f"}; 
+		  // test avec le paramètre dt, valeur non entière
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+			}
+	
+	@Test
+	public void testArg20() {
+		  String invalideOptions1[] = {"-ti","2","5.3f", "3"}; 
+		  // test avec le paramètre ar, valeur non flottante
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
 		  } catch (ArgumentsException e) {
