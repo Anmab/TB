@@ -167,7 +167,7 @@ public class Simulateur {
 				transmetteurLogique.connecter(soundeLogique2);
 			}
 		} else if (nTrajet != 0) {
-			// Analogique sans multi trajet
+			// Analogique avec multi trajet
 			source.connecter(emetteur);
 			emetteur.connecter(transmetteurMultiTrajets);
 			transmetteurMultiTrajets.connecter(transmetteurAnalogique);
@@ -191,7 +191,7 @@ public class Simulateur {
 				transmetteurMultiTrajets.connecter(soundeanalogique3);
 			}
 		}else if(nTrajet == 0){
-			// Analogique avec multi trajet
+			// Analogique sans multi trajet
 			source.connecter(emetteur);
 			emetteur.connecter(transmetteurAnalogique);
 			transmetteurAnalogique.connecter(recepteur);
@@ -214,8 +214,8 @@ public class Simulateur {
 	}
 
 	/**
-	 * La m�thode analyseArguments extrait d'un tableau de cha�nes de caract�res
-	 * les diff�rentes options de la simulation. Elle met � jour les attributs
+	 * La methode analyseArguments extrait d'un tableau de chaines de caract�res
+	 * les diff�rentes options de la simulation. Elle met a jour les attributs
 	 * du Simulateur.
 	 * 
 	 * @param args
