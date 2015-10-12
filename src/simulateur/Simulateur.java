@@ -341,7 +341,7 @@ public class Simulateur {
 					}
 					if (args[i].matches("[0-9]+")) {
 						//dt = decalage
-						decalage[j] = new Float(args[i]);
+						decalage[j] = new Integer(args[i]);
 					}
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
