@@ -87,6 +87,7 @@ public class Simulateur {
 	//multitrajet
 	private float ampliRelative[] = new float[5];
 	private int decalage[] = new int[5];
+	private int nTrajet=0;
 	
 	private Transmetteur<Float, Float> transmetteurMultiTrajets = null;
 	/**
@@ -363,70 +364,21 @@ public class Simulateur {
 				help = true;
 			} else if (args[i].matches("-ti")) {
 				i++;
-				if (args[i].matches("[1]")) {
+				if (args[i].matches("[1-5]")) {
 					//i = nbTrajet
+					nTrajet = new Integer(args[i]);
 					if (args[i].matches("[0-9]+")) {
 						//dt = decalage
-						decalage[0] = new Integer(args[i]);
+						decalage[nTrajet] = new Integer(args[i]);
+						i++;
 					}
+					
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
-						ampliRelative[0] = new Float(args[i]);
+						ampliRelative[nTrajet] = new Float(args[i]);
+						i++;
 					}
 				}
-			} else if (args[i].matches("-ti")) {
-				i++;
-				if (args[i].matches("[2]")) {
-					//i = nbTrajet
-					if (args[i].matches("[0-9]+")) {
-						//dt = decalage
-						decalage[1] = new Integer(args[i]);
-					}
-					if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")) {
-						//ar = ampliRelative
-						ampliRelative[1] = new Float(args[i]);
-					}
-				}
-			} else if (args[i].matches("-ti")) {
-				i++;
-				if (args[i].matches("[3]")) {
-					//i = nbTrajet
-					if (args[i].matches("[0-9]+")) {
-						//dt = decalage
-						decalage[2] = new Integer(args[i]);
-					}
-					if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")) {
-						//ar = ampliRelative
-						ampliRelative[2] = new Float(args[i]);
-					}
-				}
-			} else if (args[i].matches("-ti")) {
-				i++;
-				if (args[i].matches("[4]")) {
-					//i = nbTrajet
-					if (args[i].matches("[0-9]+")) {
-						//dt = decalage
-						decalage[3] = new Integer(args[i]);
-					}
-					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
-						//ar = ampliRelative
-						ampliRelative[3] = new Float(args[i]);
-					}
-				}
-			} else if (args[i].matches("-ti")) {
-				i++;
-				if (args[i].matches("[5]")) {
-					//i = nbTrajet
-					if (args[i].matches("[0-9]+")) {
-						//dt = decalage
-						decalage[4] = new Integer(args[i]);
-					}
-					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
-						//ar = ampliRelative
-						ampliRelative[4] = new Float(args[i]);
-					}
-				}
-
 			} else
 				throw new ArgumentsException("Option invalide :" + args[i]);
 		}
