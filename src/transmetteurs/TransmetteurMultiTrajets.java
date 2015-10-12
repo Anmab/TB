@@ -12,9 +12,8 @@ public class TransmetteurMultiTrajets extends Transmetteur<Float, Float> {
 	private float ampliRelative[];
 	private int decalage[];
 
-	public TransmetteurMultiTrajets(int nTrajet[], float ampliRelative[],int decalage[]) {
+	public TransmetteurMultiTrajets(float ampliRelative[],int decalage[]) {
 		super();
-		this.nTrajet = nTrajet;
 		this.ampliRelative = ampliRelative;
 		this.decalage = decalage;
 	}
