@@ -29,7 +29,7 @@ public class SimulateurTestException {
 		}
 	
 	/**
-	 * Test sans argument
+	 * Test sans arguments
 	 */
 	@Test
 	public void testArgNull() {
@@ -45,6 +45,7 @@ public class SimulateurTestException {
 	/**
 	 * argument non valide sdfqsdf
 	 */
+	
 	@Test
 	public void testArg2() {
 	  String invalideOptions1[] = {"qsdfqsdf"};
@@ -56,8 +57,9 @@ public class SimulateurTestException {
 	  collector.checkThat(valider(validite),is(true));
 	}
 	/**
-	 * -mess avec option incorrect
+	 * -mess avec options incorrectes
 	 */
+	
 	@Test
 	public void testArg3() {
 	  String invalideOptions1[] = {"-mess","a"};
@@ -68,6 +70,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 	}
+	
 	@Test
 	public void testArg4() {
 	  String invalideOptions1[] = {"-mess",""};
@@ -78,6 +81,8 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
+
 	@Test
 	public void testArg5() {
 	  String invalideOptions1[] = {"-seed",""};
@@ -88,6 +93,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
 	@Test
 	public void testArg6() {
 	  String invalideOptions1[] = {"-seed","cv"};
@@ -98,6 +104,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
 	@Test
 	public void testArg7() {
 	  String invalideOptions1[] = {"-mess","0"};
@@ -108,6 +115,11 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
+	/**
+	 * -form avec options incorrectes
+	 */
+	
 	@Test
 	public void testArg8() {
 	  String invalideOptions1[] = {"-form","NRR"};
@@ -118,6 +130,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
 	@Test
 	public void testArg9() {
 	  String invalideOptions1[] = {"-form",""};
@@ -128,6 +141,11 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
+	/**
+	 * -nbEch avec options incorrectes
+	 */
+
 	@Test
 	public void testArg10() {
 	  String invalideOptions1[] = {"-nbEch","NRR"};
@@ -138,6 +156,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
 	@Test
 	public void testArg11() {
 	  String invalideOptions1[] = {"-nbEch","999999"};
@@ -148,6 +167,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
 	@Test
 	public void testArg12() {
 	  String invalideOptions1[] = {"-nbEch","0"};
@@ -158,6 +178,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
 	@Test
 	public void testArg13() {
 	  String invalideOptions1[] = {"-nbEch"," "};
@@ -168,6 +189,11 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 		}
+	
+	/**
+	 * -ampl avec options incorrectes
+	 */
+	
 	@Test
 	public void testArg14() {
 		  String invalideOptions1[] = {"-ampl"," "};
@@ -178,6 +204,7 @@ public class SimulateurTestException {
 		  }
 		  collector.checkThat(valider(validite),is(true));
 			}
+	
 	@Test
 	public void testArg15() {
 		  String invalideOptions1[] = {"-ampl","3","1"};
@@ -188,6 +215,7 @@ public class SimulateurTestException {
 		  }
 		  collector.checkThat(valider(validite),is(true));
 			}
+	
 	@Test
 	public void testArg16() {
 		  String invalideOptions1[] = {"-ampl","3"," "};
@@ -198,63 +226,4 @@ public class SimulateurTestException {
 		  }
 		  collector.checkThat(valider(validite),is(true));
 			}
-	// Etape 4 
-	@Test
-	public void testArg17() {
-		  String invalideOptions1[] = {"-ti","6","5", "0.2f"}; 
-		  // test avec le paramètre i non compris entre 1 et 5
-		  try {
-			  simulateur = new Simulateur(invalideOptions1);
-		  } catch (ArgumentsException e) {
-			  validite = true;
-		  }
-		  collector.checkThat(valider(validite),is(true));
-			}
-	
-	@Test
-	public void testArg18() {
-		  String invalideOptions1[] = {"-ti","0","5", "0.2f"}; 
-		  // test avec le paramètre i non compris entre 1 et 5
-		  try {
-			  simulateur = new Simulateur(invalideOptions1);
-		  } catch (ArgumentsException e) {
-			  validite = true;
-		  }
-		  collector.checkThat(valider(validite),is(true));
-			}
-	
-	@Test
-	public void testArg19() {
-		  String invalideOptions1[] = {"-ti","2","5.3f", "0.2f"}; 
-		  // test avec le paramètre dt, valeur non entière
-		  try {
-			  simulateur = new Simulateur(invalideOptions1);
-		  } catch (ArgumentsException e) {
-			  validite = true;
-		  }
-		  collector.checkThat(valider(validite),is(true));
-	}
-	
-	@Test
-	public void testArg20() {
-		  String invalideOptions1[] = {"-ti","2","5.3f", "3"}; 
-		  // test avec le paramètre ar, valeur positive non flottante
-		  try {
-			  simulateur = new Simulateur(invalideOptions1);
-		  } catch (ArgumentsException e) {
-			  validite = true;
-		  }
-		  collector.checkThat(valider(validite),is(true));
-	}
-	
-	public void testArg21() {
-		  String invalideOptions1[] = {"-ti","2","5.3f", "-3"}; 
-		  // test avec le paramètre ar, valeur négative non flottante
-		  try {
-			  simulateur = new Simulateur(invalideOptions1);
-		  } catch (ArgumentsException e) {
-			  validite = true;
-		  }
-		  collector.checkThat(valider(validite),is(true));
-	}
 }
