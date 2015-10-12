@@ -331,6 +331,9 @@ public class Simulateur {
 				test = true;
 			} else if (args[i].matches("-help|-h")) {
 				help = true;
+				
+				// 1er ti
+				
 			} else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[1]")) {
@@ -339,11 +342,18 @@ public class Simulateur {
 						//dt = decalage
 						decalage[0] = new Integer(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur dt incorrect :" + args[i]);
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
 						ampliRelative[0] = new Float(args[i]);
 					}
+					else
+					throw new ArgumentsException("Valeur ar incorrect :" + args[i]);
 				}
+				
+				// 2eme ti
+				
 			} else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[2]")) {
@@ -352,11 +362,18 @@ public class Simulateur {
 						//dt = decalage
 						decalage[1] = new Integer(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur dt incorrect :" + args[i]);
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
 						ampliRelative[1] = new Float(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur ar incorrect :" + args[i]);
 				}
+				
+				// 3eme ti
+				
 			} else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[3]")) {
@@ -365,11 +382,18 @@ public class Simulateur {
 						//dt = decalage
 						decalage[2] = new Integer(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur dt incorrect :" + args[i]);
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
 						ampliRelative[2] = new Float(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur ar incorrect :" + args[i]);
 				}
+				
+				// 4eme ti
+				
 			} else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[4]")) {
@@ -378,11 +402,18 @@ public class Simulateur {
 						//dt = decalage
 						decalage[3] = new Integer(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur dt incorrect :" + args[i]);
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
 						ampliRelative[3] = new Float(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur ar incorrect :" + args[i]);
 				}
+				
+				//5eme ti
+				
 			} else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[5]")) {
@@ -391,10 +422,14 @@ public class Simulateur {
 						//dt = decalage
 						decalage[4] = new Integer(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur dt incorrect :" + args[i]);
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
 						ampliRelative[4] = new Float(args[i]);
 					}
+					else
+						throw new ArgumentsException("Valeur ar incorrect :" + args[i]);
 				}
 
 			} else
