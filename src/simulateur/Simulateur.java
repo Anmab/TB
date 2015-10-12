@@ -110,10 +110,10 @@ public class Simulateur {
 	 */
 	public Simulateur(String[] args) throws ArgumentsException {
 
-		analyseArguments(args); // analyser et r�cup�rer les arguments
+		analyseArguments(args); // analyser et recuperer les arguments
 		// Source
 		if (messageAleatoire == true && aleatoireAvecGerme == false) {
-			// Source aléatoire sans seed
+			// Source aleatoire sans seed
 			source = new SourceAleatoire(nbBitsMess);
 		}
 		if (messageAleatoire == true && aleatoireAvecGerme == true) {
@@ -204,7 +204,7 @@ public class Simulateur {
 				SondeAnalogique soundeanalogique1 = new SondeAnalogique(
 						"Sonde Analogique : Sortie de l'émetteur");
 				SondeAnalogique soundeanalogique2 = new SondeAnalogique(
-						"Sonde Analogique : Sorite du canal de transmission");
+						"Sonde Analogique : Sortie du canal de transmission");
 				source.connecter(soundeLogique1);
 				recepteur.connecter(soundeLogique2);
 				emetteur.connecter(soundeanalogique1);
