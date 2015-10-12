@@ -140,15 +140,15 @@ public class Simulateur {
 		// emmeteur-recepteurs
 		if (forme == "NRZ") {
 			emetteur = new EmetteurNrz(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurNrzV2(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurNrz(nbEch, amplMin, amplMax);
 		}
 		if (forme == "RZ") {
 			emetteur = new EmetteurRz(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurRzV2(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurRz(nbEch, amplMin, amplMax);
 		}
 		if (forme == "NRZT") {
 			emetteur = new EmetteurNrzt(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurNrztV2(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurNrzt(nbEch, amplMin, amplMax);
 		}
 
 		
@@ -160,51 +160,55 @@ public class Simulateur {
 			transmetteurLogique.connecter(destination);
 			if (affichage == true) {
 				SondeLogique soundeLogique1 = new SondeLogique(
-						"Sonde Logique1", 1920);
+						"Sonde Logique : Source", 1920);
 				SondeLogique soundeLogique2 = new SondeLogique(
-						"Sonde Logique2", 1920);
+						"Sonde Logique : Destination", 1920);
 				source.connecter(soundeLogique1);
 				transmetteurLogique.connecter(soundeLogique2);
 			}
-		} else {
-			// Analogique
+		} else if (nTrajet != 0) {
+			// Analogique sans multi trajet
 			source.connecter(emetteur);
-			if (forme == "non") {
-				emetteur.connecter(transmetteurAnalogique);
-				transmetteurAnalogique.connecter(recepteur);
-			}
-			else{
-				emetteur.connecter(transmetteurMultiTrajets);
-				transmetteurMultiTrajets.connecter(transmetteurAnalogique);
-				transmetteurAnalogique.connecter(recepteur);
-			}
+			emetteur.connecter(transmetteurMultiTrajets);
+			transmetteurMultiTrajets.connecter(transmetteurAnalogique);
+			transmetteurAnalogique.connecter(recepteur);
 			recepteur.connecter(destination);
 			if (affichage == true) {
 				SondeLogique soundeLogique1 = new SondeLogique(
-						"Sonde Logique1", 1920);
+						"Sonde Logique : Source", 1920);
 				SondeLogique soundeLogique2 = new SondeLogique(
-						"Sonde Logique2", 1920);
+						"Sonde Logique : Destination", 1920);
 				SondeAnalogique soundeanalogique1 = new SondeAnalogique(
-						"Sonde Analogique1");
+						"Sonde Analogique : Sortie de l'émetteur");
 				SondeAnalogique soundeanalogique2 = new SondeAnalogique(
-						"Sonde Analogique2");
+						"Sonde Analogique : Sorite du canal de transmission");
 				SondeAnalogique soundeanalogique3 = new SondeAnalogique(
-						"Sonde Analogique3");
-
-				if (forme == "non") {
-					source.connecter(soundeLogique1);
-					recepteur.connecter(soundeLogique2);
-					emetteur.connecter(soundeanalogique1);
-					transmetteurAnalogique.connecter(soundeanalogique2);
-				}
-				else{
-					source.connecter(soundeLogique1);
-					recepteur.connecter(soundeLogique2);
-					emetteur.connecter(soundeanalogique1);
-					transmetteurAnalogique.connecter(soundeanalogique2);
-					transmetteurMultiTrajets.connecter(soundeanalogique3);
-				}
-
+						"Sonde Analogique : multi-trajet");
+				source.connecter(soundeLogique1);
+				recepteur.connecter(soundeLogique2);
+				emetteur.connecter(soundeanalogique1);
+				transmetteurAnalogique.connecter(soundeanalogique2);	
+				transmetteurMultiTrajets.connecter(soundeanalogique3);
+			}
+		}else if(nTrajet == 0){
+			// Analogique avec multi trajet
+			source.connecter(emetteur);
+			emetteur.connecter(transmetteurAnalogique);
+			transmetteurAnalogique.connecter(recepteur);
+			recepteur.connecter(destination);
+			if (affichage == true) {
+				SondeLogique soundeLogique1 = new SondeLogique(
+						"Sonde Logique : Source", 1920);
+				SondeLogique soundeLogique2 = new SondeLogique(
+						"Sonde Logique : Destination", 1920);
+				SondeAnalogique soundeanalogique1 = new SondeAnalogique(
+						"Sonde Analogique : Sortie de l'émetteur");
+				SondeAnalogique soundeanalogique2 = new SondeAnalogique(
+						"Sonde Analogique : Sorite du canal de transmission");
+				source.connecter(soundeLogique1);
+				recepteur.connecter(soundeLogique2);
+				emetteur.connecter(soundeanalogique1);
+				transmetteurAnalogique.connecter(soundeanalogique2);		
 			}
 		}
 	}
@@ -367,16 +371,17 @@ public class Simulateur {
 				if (args[i].matches("[1-5]")) {
 					//i = nbTrajet
 					nTrajet = new Integer(args[i]);
+					i++;
 					if (args[i].matches("[0-9]+")) {
 						//dt = decalage
-						decalage[nTrajet] = new Integer(args[i]);
+						decalage[nTrajet-1] = new Integer(args[i]);
 						i++;
 					}
 					
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
-						ampliRelative[nTrajet] = new Float(args[i]);
-						i++;
+						ampliRelative[nTrajet-1] = new Float(args[i]);
+						
 					}
 				}
 			} else
