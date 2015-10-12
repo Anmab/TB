@@ -238,7 +238,18 @@ public class SimulateurTestException {
 	@Test
 	public void testArg20() {
 		  String invalideOptions1[] = {"-ti","2","5.3f", "3"}; 
-		  // test avec le paramètre ar, valeur non flottante
+		  // test avec le paramètre ar, valeur positive non flottante
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+	
+	public void testArg21() {
+		  String invalideOptions1[] = {"-ti","2","5.3f", "-3"}; 
+		  // test avec le paramètre ar, valeur négative non flottante
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
 		  } catch (ArgumentsException e) {
