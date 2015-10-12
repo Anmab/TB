@@ -336,15 +336,15 @@ public class Simulateur {
 				for (int j = 0; j<5;j++)
 				{
 					if (args[i].matches("[1-5]")) {
-						//i
+						//i = nbTrajet
 						nTrajet[j] = new Integer(args[i]);
 					}
 					if (args[i].matches("[0-9]+")) {
-						//dt
+						//dt = decalage
 						decalage[j] = new Float(args[i]);
 					}
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
-						//ar
+						//ar = ampliRelative
 						ampliRelative[j] = new Float(args[i]);
 					}
 				}
