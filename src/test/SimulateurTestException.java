@@ -56,6 +56,7 @@ public class SimulateurTestException {
 	  }
 	  collector.checkThat(valider(validite),is(true));
 	}
+	
 	/**
 	 * -mess avec options incorrectes
 	 */
@@ -233,7 +234,7 @@ public class SimulateurTestException {
 	
 	@Test
 	public void testArg17() {
-		  String invalideOptions1[] = {"-ti"};
+		  String invalideOptions1[] = {"-ti",""};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
 		  } catch (ArgumentsException e) {
@@ -285,4 +286,16 @@ public class SimulateurTestException {
 		  }
 		  collector.checkThat(valider(validite),is(true));
 	}
+
+	@Test
+	public void testArg22() {
+		  String invalideOptions1[] = {"-ti","-1","0","1"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+
 }
