@@ -84,6 +84,10 @@ public class Simulateur {
 	private boolean help = false;
 	/** indique au Simulateur si il doit afficher une page d'aide*/
 	
+	//multitrajet
+	private int nTrajet[] = new int[5];
+	private float ampliRelative[] = new float[5];
+	private float decalage[] = new float[5];
 	/**
 	 * Le constructeur de Simulateur construit une cha�ne de transmission
 	 * compos�e d'une Source <Boolean>, d'une Destination <Boolean> et de
@@ -327,6 +331,24 @@ public class Simulateur {
 				test = true;
 			} else if (args[i].matches("-help|-h")) {
 				help = true;
+			} else if (args[i].matches("-ti")) {
+				i++;
+				for (int j = 0; j<5;j++)
+				{
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//i
+						nTrajet[j] = new Integer(args[i]);
+					}
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//dt
+						decalage[j] = new Float(args[i]);
+					}
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//ar
+						ampliRelative[j] = new Float(args[i]);
+					}
+				}
+
 			} else
 				throw new ArgumentsException("Option invalide :" + args[i]);
 		}
