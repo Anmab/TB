@@ -87,7 +87,7 @@ public class Simulateur {
 	//multitrajet
 	private int nTrajet[] = new int[5];
 	private float ampliRelative[] = new float[5];
-	private float decalage[] = new float[5];
+	private int decalage[] = new int[5];
 	/**
 	 * Le constructeur de Simulateur construit une cha�ne de transmission
 	 * compos�e d'une Source <Boolean>, d'une Destination <Boolean> et de
