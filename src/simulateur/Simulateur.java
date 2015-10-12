@@ -333,19 +333,67 @@ public class Simulateur {
 				help = true;
 			} else if (args[i].matches("-ti")) {
 				i++;
-				for (int j = 0; j<5;j++)
-				{
-					if (args[i].matches("[1-5]")) {
-						//i = nbTrajet
-						nTrajet[j] = new Integer(args[i]);
-					}
+				if (args[i].matches("[1]")) {
+					//i = nbTrajet
 					if (args[i].matches("[0-9]+")) {
 						//dt = decalage
-						decalage[j] = new Integer(args[i]);
+						decalage[0] = new Integer(args[i]);
 					}
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
-						ampliRelative[j] = new Float(args[i]);
+						ampliRelative[0] = new Float(args[i]);
+					}
+				}
+			} else if (args[i].matches("-ti")) {
+				i++;
+				if (args[i].matches("[2]")) {
+					//i = nbTrajet
+					if (args[i].matches("[0-9]+")) {
+						//dt = decalage
+						decalage[1] = new Integer(args[i]);
+					}
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//ar = ampliRelative
+						ampliRelative[1] = new Float(args[i]);
+					}
+				}
+			} else if (args[i].matches("-ti")) {
+				i++;
+				if (args[i].matches("[3]")) {
+					//i = nbTrajet
+					if (args[i].matches("[0-9]+")) {
+						//dt = decalage
+						decalage[2] = new Integer(args[i]);
+					}
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//ar = ampliRelative
+						ampliRelative[2] = new Float(args[i]);
+					}
+				}
+			} else if (args[i].matches("-ti")) {
+				i++;
+				if (args[i].matches("[4]")) {
+					//i = nbTrajet
+					if (args[i].matches("[0-9]+")) {
+						//dt = decalage
+						decalage[3] = new Integer(args[i]);
+					}
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//ar = ampliRelative
+						ampliRelative[3] = new Float(args[i]);
+					}
+				}
+			} else if (args[i].matches("-ti")) {
+				i++;
+				if (args[i].matches("[5]")) {
+					//i = nbTrajet
+					if (args[i].matches("[0-9]+")) {
+						//dt = decalage
+						decalage[4] = new Integer(args[i]);
+					}
+					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+						//ar = ampliRelative
+						ampliRelative[4] = new Float(args[i]);
 					}
 				}
 
