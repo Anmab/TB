@@ -72,7 +72,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 			/**
 			 * Calcul de l'ecart-type
 			 **/
-
+			
 			tau = (float) Math.sqrt(puissanceSignal
 					/ (Math.pow(10, (snr / 10))));
 

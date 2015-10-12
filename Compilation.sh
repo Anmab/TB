@@ -7,9 +7,12 @@ echo "#######################################################################"
 echo
 echo "Compilation du programme ..."
 echo
+
+mkdir ./test
 mv ./src/test ./
 mkdir ./bin
 javac ./src/*/*.java -d ./bin
+
 echo
 echo "Création de la JavaDoc ..."
 echo
