@@ -233,7 +233,7 @@ public class SimulateurTestException {
 			  validite = true;
 		  }
 		  collector.checkThat(valider(validite),is(true));
-			}
+	}
 	
 	@Test
 	public void testArg20() {
@@ -245,5 +245,5 @@ public class SimulateurTestException {
 			  validite = true;
 		  }
 		  collector.checkThat(valider(validite),is(true));
-			}
+	}
 }

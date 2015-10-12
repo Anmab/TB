@@ -26,9 +26,9 @@ public class SimulateurTestTP4 {
 	public void setUp() throws Exception {
 
 	}
-	//dans les trois fonctions diff�rentes le TEB pour un SNR sera toujours de 0. Nous ne pouvons tester que cette valeur
-	// car nous savons � l'avance le TEB qui correspond � ce SNR.
-	// Les tests suivants vont nous permettre de v�rifier que m�me avec du bruit pour un SNR de 0 on aura un TEB de 0
+	// Dans les trois fonctions differentes le TEB pour un SNR sera toujours de 0. 
+	// Nous ne pouvons tester que cette valeur car nous savons à l'avance le TEB qui correspond à ce SNR.
+	// Les tests suivants vont nous permettre de verifier que meme avec du bruit pour un SNR de 0 on aura un TEB egal a 0.
 	
 	public void TestNRZMultiTrajetBruite() throws Exception{
 			

@@ -34,7 +34,7 @@ public class SimulateurTestTP1 {
 		System.out.println("Tests du Simulateur :");
 		System.out.println("	Chaîne transmission logique parfaite en Java séance 1 :");
 		
-		// Teste a vide
+		// Test a vide
 		String options[] = {"-s"};
 		simulateur = new Simulateur(options);
 		simulateur.execute();
