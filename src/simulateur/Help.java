@@ -5,7 +5,7 @@ public class Help {
   System.out.println("Ce document récapitule les modalités d'invocation du simulateur, afin d'harmoniser l'utilisation des simulateurs rendus par les différentes équipes. La documentation ci-dessous est fournie se lon le modèle de pages man Linux.");
   System.out.println("SIMULATEUR(1)");
   System.out.println("NAME");
-  System.out.println("simulateur – Simulation de la transmission d'un message numérique.");
+  System.out.println("Simulation de la transmission d'un message numérique.");
   System.out.println();
   System.out.println("SYNOPSIS");
   System.out.println("java Simulateur [...]");
@@ -40,24 +40,24 @@ public class Help {
   System.out.println("utilisation d’une transmission analogique, ne précise le nombre d’échantillons par bit. ne doit être une valeur entière positive. Par défaut le simulateur doit utiliser 30 échantillons par bit.");
   System.out.println();
   System.out.println("-ampl min max");
-  System.out.println("utilisation d’une transmission analogique, min et max précisent l’amplitude min et max du signal. min et max doivent être des valeurs flottantes (avec min < max ). Par défaut le simulateur doit utiliser 0.0f comme min et 1.0f comme max.");
+  System.out.println("utilisation d’une transmission analogique, min et max précisent l’amplitude min et max du signal. min et max doivent être des valeurs flottantes (avec min < max ). Par défaut, le simulateur doit utiliser 0.0f comme min et 1.0f comme max.");
   System.out.println();
   System.out.println("-snr s");
-  System.out.println("utilisation d’une transmission analogique bruitée, s est la valeur du rapport signal sur bruit (SNR en dB). Le paramètre s doit être une valeur flottante.");
+  System.out.println("utilisation d’une transmission analogique bruitée, c'est la valeur du rapport signal sur bruit (SNR en dB). Le paramètre s doit être une valeur flottante.");
   System.out.println();
   System.out.println("-ti i dt ar");
   System.out.println("utilisation d’une transmission analogique multitrajet. dt précise le décalage temporel (en nombre d’échantillons) entre le i ème trajet indirect du signal et le trajet direct, ar précise l’amplitude relative du signal du i ème trajet indirect par rapport à celle du signal du trajet direct. Les paramètres i, dt et ar doivent être respectivement une valeur entière (de 1 à 5), une valeur entière et une valeur flottante. Par défaut le simulateur doit utiliser 0 et 0. 0f pour tous les trajets indirects (5 au maximum).");
   System.out.println();
   System.out.println("-transducteur");
-  System.out.println("précise l’utilisation d’un transducteur (en émission et réception). Par défaut le simulateur n’utilise pas de transducteur.");
+  System.out.println("précise l’utilisation d’un transducteur (en émission et réception). Par défaut, le simulateur n’utilise pas de transducteur.");
   System.out.println();
   System.out.println("-aveugle");
-  System.out.println("précise l’utilisation de mécanismes de détermination, dans les étages de réception du signal analogique, des amplitudes min et max, des retards et de leurs amplitudes relatives. Par défaut le simulateur n’utilise pas ces mécanismes, et les valeurs des amplitudes min et max, de s retards et de leurs amplitudes relatives sont des paramètres des étages de réception. ");
+  System.out.println("précise l’utilisation de mécanismes de détermination, dans les étages de réception du signal analogique, des amplitudes min et max, des retards et de leurs amplitudes relatives. Par défaut, le simulateur n’utilise pas ces mécanismes, et les valeurs des amplitudes min et max, de s retards et de leurs amplitudes relatives sont des paramètres des étages de réception. ");
   System.out.println();
   System.out.println("-h -help");
   System.out.println("premet d'afficher ce messge d'aide");
   System.out.println();
   System.out.println("-test");
-  System.out.println("Permets de générer un fichier .Csv qui contient les échantillons du buit généger par le simulateur ne fonctionne que lorsque la transmission est bruitée");
+  System.out.println("Permets de générer un fichier .Csv qui contient les échantillons du bruit génég�s par le simulateur ne fonctionne que lorsque la transmission est bruitée");
  }
 }

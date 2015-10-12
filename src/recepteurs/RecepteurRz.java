@@ -12,7 +12,7 @@ public class RecepteurRz extends Transmetteur<Float, Boolean> {
 
 	/**
 	 * @param nbEch
-	 *            nombre d'échantillon
+	 *            nombre d'echantillon
 	 * @param ampMin
 	 *            amplitude minimale
 	 * @param ampMax
@@ -27,11 +27,11 @@ public class RecepteurRz extends Transmetteur<Float, Boolean> {
 	}
 
 	/**
-	 * reçoit une information. Cette méthode, en fin d'exécution, appelle la
-	 * méthode émettre.
+	 * recoit une information. Cette methode, en fin d'execution, appelle la
+	 * methode emettre.
 	 * 
 	 * @param information
-	 *            l'information ré�ue
+	 *            l'information recue
 	 * @throws InformationNonConforme
 	 *             si un informationRecue est "null"
 	 */
@@ -50,7 +50,7 @@ public class RecepteurRz extends Transmetteur<Float, Boolean> {
 
 	/**
 	 * Transforme une information analogique (Information<Float>) en information
-	 * logique Au millieu d'un symbole, on test sa valeur pour déterminé la
+	 * logique Au millieu d'un symbole, on test sa valeur pour determiner la
 	 * nature de l'information
 	 */
 	@Override
