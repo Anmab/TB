@@ -179,11 +179,11 @@ public class Simulateur {
 				SondeLogique soundeLogique2 = new SondeLogique(
 						"Sonde Logique : Destination", 1920);
 				SondeAnalogique soundeanalogique1 = new SondeAnalogique(
-						"Sonde Analogique : Sortie de l'émetteur");
+						"Sonde Analogique : Sortie de l'emetteur (entree du canal de transmission");
 				SondeAnalogique soundeanalogique2 = new SondeAnalogique(
-						"Sonde Analogique : Sorite du canal de transmission");
+						"Sonde Analogique : Sortie du canal de transmission (entree du recepteur)");
 				SondeAnalogique soundeanalogique3 = new SondeAnalogique(
-						"Sonde Analogique : multi-trajet");
+						"Sonde Analogique : correspond au multi-trajet");
 				source.connecter(soundeLogique1);
 				recepteur.connecter(soundeLogique2);
 				emetteur.connecter(soundeanalogique1);
