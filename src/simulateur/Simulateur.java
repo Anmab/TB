@@ -335,11 +335,11 @@ public class Simulateur {
 				i++;
 				for (int j = 0; j<5;j++)
 				{
-					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+					if (args[i].matches("[1-5]")) {
 						//i
 						nTrajet[j] = new Integer(args[i]);
 					}
-					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
+					if (args[i].matches("[0-9]+")) {
 						//dt
 						decalage[j] = new Float(args[i]);
 					}
