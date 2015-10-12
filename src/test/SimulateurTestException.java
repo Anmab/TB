@@ -226,4 +226,63 @@ public class SimulateurTestException {
 		  }
 		  collector.checkThat(valider(validite),is(true));
 			}
+
+	/**
+	 * -ti avec options incorrectes
+	 */
+	
+	@Test
+	public void testArg17() {
+		  String invalideOptions1[] = {"-ti"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+
+	@Test
+	public void testArg18() {
+		  String invalideOptions1[] = {"-ti","aasc"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+	
+	@Test
+	public void testArg19() {
+		  String invalideOptions1[] = {"-ti","3","dede"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+	
+	@Test
+	public void testArg20() {
+		  String invalideOptions1[] = {"-ti","3","0","dede"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+	
+	@Test
+	public void testArg21() {
+		  String invalideOptions1[] = {"-ti","3","0","-2"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
 }
