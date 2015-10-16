@@ -221,7 +221,7 @@ public class Simulateur {
 	 * @param args
 	 *            le tableau des differents arguments. <br>
 	 * <br>
-	 *            Les arguments autorisï¿½s sont : <br>
+	 *            Les arguments autorises sont : <br>
 	 *            <dl>
 	 *            <dt>-mess m</dt>
 	 *            <dd>m (String) constitue de 7 ou plus digits a 0 | 1, le
@@ -232,11 +232,11 @@ public class Simulateur {
 	 *            <dt>-s</dt>
 	 *            <dd>utilisation des sondes d'affichage</dd>
 	 *            <dt>-seed v</dt>
-	 *            <dd>v (int) d'initialisation pour les generateurs alï¿½atoires</dd>
+	 *            <dd>v (int) d'initialisation pour les generateurs aleatoires</dd>
 	 *            <br>
 	 *            <dt>-form f</dt>
 	 *            <dd>codage (String) RZ, NRZR, NRZT, la forme d'onde du signal
-	 *            a transmettre (RZ par dï¿½faut)</dd>
+	 *            a transmettre (RZ par dfaut)</dd>
 	 *            <dt>-nbEch ne</dt>
 	 *            <dd>ne (int) le nombre d'echantillons par bit (ne >= 6 pour du
 	 *            RZ, ne >= 9 pour du NRZT, ne >= 18 pour du RZ, 30 par defaut))
@@ -253,7 +253,7 @@ public class Simulateur {
 	 *            <dd>i (int) numero du trajet indirect (de 1 a 5), dt (int)
 	 *            valeur du decalage temporel du ieme trajet indirect en nombre
 	 *            d'echantillons par bit, ar (float) amplitude relative au
-	 *            signal initial du signal ayant effectuee le ie½me trajet
+	 *            signal initial du signal ayant effectuee le ieme trajet
 	 *            indirect</dd>
 	 *            <br>
 	 *            <dt>-transducteur</dt>
@@ -261,7 +261,7 @@ public class Simulateur {
 	 *            <br>
 	 *            <dt>-aveugle</dt>
 	 *            <dd>les recepteurs ne connaissent ni l'amplitude min et max du
-	 *            signal, ni les diffï¿½rents trajets indirects (s'il y en a).</dd>
+	 *            signal, ni les differents trajets indirects (s'il y en a).</dd>
 	 *            <br>
 	 *            </dl>
 	 * <br>
