@@ -377,12 +377,19 @@ public class Simulateur {
 						decalage[nTrajet-1] = new Integer(args[i]);
 						i++;
 					}
-					
+					else{
+						throw new ArgumentsException("Valeur du parametre -ti i dt invalide : " + args[i]);
+					}
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
 						//ar = ampliRelative
-						ampliRelative[nTrajet-1] = new Float(args[i]);
-						
+						ampliRelative[nTrajet-1] = new Float(args[i]);	
 					}
+					else{
+						throw new ArgumentsException("Valeur du parametre -ti i dt ar invalide : " + args[i]);
+					}
+				}
+				else {
+					throw new ArgumentsException("Valeur du parametre -ti i invalide : " + args[i]);
 				}
 			} else
 				throw new ArgumentsException("Option invalide :" + args[i]);
