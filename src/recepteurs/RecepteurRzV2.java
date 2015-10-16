@@ -76,7 +76,7 @@ public class RecepteurRzV2 extends Transmetteur<Float, Boolean> {
 				for (int echantillon = (symbole + (nbEch / 3)); echantillon < (symbole + (2 * nbEch) / 3); echantillon++) {
 					sommeEch += (informationRecue.iemeElement(echantillon));
 				}
-				moyenneSymbole = sommeEch / ((1 / 3) * nbEch);
+				moyenneSymbole = (sommeEch * 3 ) / (nbEch);
 
 				if (moyenneSymbole >= (ampMax + ampMin) / 2) {
 					informationEmise.add(true);
