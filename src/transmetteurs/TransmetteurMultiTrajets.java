@@ -50,37 +50,22 @@ public class TransmetteurMultiTrajets extends Transmetteur<Float, Float> {
 
 			informationEmise = new Information();
 		}
-		System.out.println(decalage[0]);
-		System.out.println(decalage[1]);
-		System.out.println(decalage[2]);
-		System.out.println(decalage[3]);
-		System.out.println(decalage[4]);
-		System.out.println(ampliRelative[0]);
-		System.out.println(ampliRelative[1]);
-		System.out.println(ampliRelative[2]);
-		System.out.println(ampliRelative[3]);
-		System.out.println(ampliRelative[4]);
 		for (int i = 0 ; i<informationRecue.nbElements();i++){
 			ech = informationRecue.iemeElement(i);
-			if(i-decalage[0]>=0){
-				ech += ampliRelative[0]*informationRecue.iemeElement(i-decalage[0]);
-				//System.out.println( ampliRelative[0]*informationRecue.iemeElement(i-decalage[0]));
+			if(i+decalage[0]<informationRecue.nbElements()){
+				ech += ampliRelative[0]*informationRecue.iemeElement(i+decalage[0]);
 			}
-			if(i-decalage[1]>=0){
-				ech += ampliRelative[1]*informationRecue.iemeElement(i-decalage[1]);
-				//System.out.println("b");
+			if(i+decalage[1]<informationRecue.nbElements()){
+				ech += ampliRelative[1]*informationRecue.iemeElement(i+decalage[1]);
 			}
-			if(i-decalage[2]>=0){
-				ech += ampliRelative[2]*informationRecue.iemeElement(i-decalage[2]);
-				//System.out.println("c");
+			if(i+decalage[2]<informationRecue.nbElements()){
+				ech += ampliRelative[2]*informationRecue.iemeElement(i+decalage[2]);
 			}
-			if(i-decalage[3]>=0){
-				ech += ampliRelative[3]*informationRecue.iemeElement(i-decalage[3]);
-				//System.out.println("d");
+			if(i+decalage[3]<informationRecue.nbElements()){
+				ech += ampliRelative[3]*informationRecue.iemeElement(i+decalage[3]);
 			}
-			if(i-decalage[4]>=0){
-				ech += ampliRelative[4]*informationRecue.iemeElement(i-decalage[4]);
-				//System.out.println("e");
+			if(i+decalage[4]<informationRecue.nbElements()){
+				ech += ampliRelative[4]*informationRecue.iemeElement(i+decalage[4]);
 			}
 			informationEmise.add(ech);
 				
