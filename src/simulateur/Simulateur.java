@@ -20,19 +20,16 @@ import recepteurs.*;
  * transmission composee d'une Source, d'un nombre variable de Transmetteur(s)
  * et d'une Destination.
  * 
- * @author cousin
- * @author prou
- * 
  */
 public class Simulateur {
 
 	private boolean affichage = false;
-	/** indique si le Simulateur utilise des sondes d'affichage */
+	/** indique si le simulateur utilise des sondes d'affichage */
 	private boolean messageAleatoire = true;
-	/** indique si le Simulateur utilise un message genere de maniere aleatoire */
+	/** indique si le simulateur utilise un message genere de maniere aleatoire */
 	private boolean aleatoireAvecGerme = false;
 	/**
-	 * indique si le Simulateur utilise un germe pour initialiser les
+	 * indique si le simulateur utilise un germe pour initialiser les
 	 * generateurs aleatoires
 	 */
 	private Integer seed = null;
@@ -55,11 +52,11 @@ public class Simulateur {
 	// Analogique
 	private String forme = "non";
 	/**
-	 * indique au Simulateur le type de de forme d'aude utilise null si le
-	 * signal est logique NRZ NRZT RZ
+	 * indique au Simulateur le type de la forme 
+	 * utilise null si le signal est logique NRZ NRZT RZ
 	 */
 	private Integer nbEch = 30;
-	/** indique au Simulateur le nombre d'echantillons utilise par symbole */
+	/** indique au Simulateur le nombre d'echantillons par symbole */
 	private float amplMin = 0.0f;
 	/** indique au Simulateur l'amplitude min du signal */
 	private float amplMax = 1.0f;
@@ -76,13 +73,13 @@ public class Simulateur {
 
 	// Signal bruite
 	private float snr = 0.0f;
-	/** indique au Simulateur le rapport Signal sur bruit. */
+	/** indique au simulateur le rapport signal sur bruit. */
 
 	private boolean test = false;
-	/** indique au Simulateur si il doit generer des fichier de test */
+	/** indique au simulateur s'il doit generer des fichier de test */
 
 	private boolean help = false;
-	/** indique au Simulateur si il doit afficher une page d'aide*/
+	/** indique au Simulateur s'il doit afficher une page d'aide*/
 	
 	//multitrajet
 	private float ampliRelative[] = new float[5];
@@ -455,7 +452,7 @@ public class Simulateur {
 			if (!messageON.iemeElement(i).equals(messageOUT.iemeElement(i)))
 				nbBitFaux++;
 		}
-		// Prise en compte de la différance de taille est messages
+		// Prise en compte de la différence de taille des messages
 		if (messageON.nbElements() != messageOUT.nbElements()) {
 			nbBitFaux += Math.abs(messageON.nbElements()
 					- messageOUT.nbElements());
