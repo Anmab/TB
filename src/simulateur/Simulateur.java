@@ -43,7 +43,7 @@ public class Simulateur {
 	 * impose
 	 */
 	private String messageString = "100";
-	/** la cha�ne de caracteres correspondant a m dans l'argument -mess m */
+	/** la chaine de caracteres correspondant a m dans l'argument -mess m */
 
 	private Source<Boolean> source = null;
 	/** le composant Source de la chaine de transmission */
@@ -102,7 +102,7 @@ public class Simulateur {
 	 * connectes.
 	 * 
 	 * @param args
-	 *            le tableau des diff�rents arguments.
+	 *            le tableau des differents arguments.
 	 * 
 	 * @throws ArgumentsException
 	 *             si un des arguments est incorrect
@@ -398,13 +398,13 @@ public class Simulateur {
 	}
 
 	/**
-	 * La m�thode execute effectue un envoi de message par la source de la
-	 * cha�ne de transmission du Simulateur.
+	 * La methode execute effectue un envoi de message par la source de la
+	 * chaine de transmission du Simulateur.
 	 * 
 	 * @return les options explicites de simulation.
 	 * 
 	 * @throws Exception
-	 *             si un probl�me survient lors de l'ex�cution
+	 *             si un probleme survient lors de l'execution
 	 * 
 	 */
 	public void execute() throws Exception {
@@ -435,8 +435,8 @@ public class Simulateur {
 	}
 
 	/**
-	 * Permet de colculer le Taux d'erreur Binaire d'une ligne de transmission
-	 * Entre le source et la destination final
+	 * La methode calculTauxErreurBinaire permet de calculer le Taux d'erreur Binaire d'une ligne de transmission
+	 * Entre le source et la destination finale
 	 * 
 	 * @return Le TRB (Float)
 	 */
@@ -464,11 +464,11 @@ public class Simulateur {
 		return ((float) nbBitFaux / (float) messageON.nbElements());
 	}
 	/**
-	 * La fonction main instancie un Simulateur � l'aide des arguments
-	 * param�tres et affiche le r�sultat de l'ex�cution d'une transmission.
+	 * La fonction main instancie un Simulateur a l'aide des arguments
+	 * passes en parametre et affiche le resultat de l'execution d'une transmission.
 	 * 
 	 * @param args
-	 *            les diff�rents arguments qui serviront � l'instanciation du
+	 *            les differents arguments qui serviront a l'instanciation du
 	 *            Simulateur.
 	 */
 	public static void main(String[] args) {
@@ -517,9 +517,6 @@ public class Simulateur {
 				e.printStackTrace();
 				System.exit(-2);
 			}
-			
-			  
-			
 		}
 	}
 }
