@@ -75,7 +75,8 @@ public class Simulateur {
 	private float snr = 0.0f;
 	/** indique au simulateur le rapport signal sur bruit. */
 
-	private boolean test = false;
+	private boolean testTEB = false;
+	private boolean testBruit = false;
 	/** indique au simulateur s'il doit generer des fichier de test */
 
 	private boolean help = false;
@@ -360,7 +361,17 @@ public class Simulateur {
 					throw new ArgumentsException(
 							"Valeur du parametre -snr invalide : " + args[i]);
 			} else if (args[i].matches("-test")) {
-				test = true;
+				testBruit = true;
+				testTEB = true;
+				i++;
+				if (args[i].matches("TEB")) {
+					testBruit = false;
+				} else if(args[i].matches("Bruit")){
+					testTEB = false;
+				}else
+					throw new ArgumentsException(
+							"Valeur du parametre -test invalide : " + args[i]);
+				
 			} else if (args[i].matches("-help|-h")) {
 				help = true;
 			} else if (args[i].matches("-ti")) {
@@ -399,7 +410,7 @@ public class Simulateur {
 		if (forme=="non" && snr != 0 ){
 			throw new ArgumentsException("L'option -snr  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
 		}
-		if (forme=="non" && snr != nbEch ){
+		if (forme == "non" && nbEch != 30  ){
 			throw new ArgumentsException("L'option -nbEch  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
 		}
 	}
@@ -416,7 +427,7 @@ public class Simulateur {
 	 */
 	public void execute() throws Exception {
 		source.emettre();
-		if (test) {
+		if (testBruit) {
 			if (transmetteurAnalogique != null) {
 				if (transmetteurAnalogique.getBruit() != null) {
 					File f = new File("../test/Bruit.csv");
@@ -505,7 +516,7 @@ public class Simulateur {
 					s += args[i] + "  ";
 				}
 				System.out.println(s + "  =>   TEB : " + tauxErreurBinaire);
-				if(simulateur.test){
+				if(simulateur.testTEB){
 					try {
 						String TEBstring = String.valueOf(tauxErreurBinaire);
 					    BufferedWriter out = new BufferedWriter(new FileWriter("../test/TEB.csv", true));
