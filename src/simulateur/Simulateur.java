@@ -392,6 +392,16 @@ public class Simulateur {
 				throw new ArgumentsException("Option invalide :" + args[i]);
 		}
 
+		// Condition final
+		if (forme=="non" && nTrajet != 0 ){
+			throw new ArgumentsException("L'option -ti (le multitrajet) ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
+		}
+		if (forme=="non" && snr != 0 ){
+			throw new ArgumentsException("L'option -snr  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
+		}
+		if (forme=="non" && snr != nbEch ){
+			throw new ArgumentsException("L'option -nbEch  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
+		}
 	}
 
 	/**
