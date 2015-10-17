@@ -234,7 +234,7 @@ public class SimulateurTestException {
 	
 	@Test
 	public void testArg17() {
-		  String invalideOptions1[] = {"-ti",""};
+		  String invalideOptions1[] = {"-ti"," "};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
 		  } catch (ArgumentsException e) {
@@ -256,7 +256,7 @@ public class SimulateurTestException {
 	
 	@Test
 	public void testArg19() {
-		  String invalideOptions1[] = {"-ti","3","dede"};
+		  String invalideOptions1[] = {"-ti","3"};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
 		  } catch (ArgumentsException e) {
@@ -267,6 +267,18 @@ public class SimulateurTestException {
 	
 	@Test
 	public void testArg20() {
+		  String invalideOptions1[] = {"-ti","3","dede"};
+		  try {
+			  simulateur = new Simulateur(invalideOptions1);
+		  } catch (ArgumentsException e) {
+			  validite = true;
+		  }
+		  collector.checkThat(valider(validite),is(true));
+	}
+		
+	
+	@Test
+	public void testArg21() {
 		  String invalideOptions1[] = {"-ti","3","0","dede"};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
@@ -277,7 +289,7 @@ public class SimulateurTestException {
 	}
 	
 	@Test
-	public void testArg21() {
+	public void testArg22() {
 		  String invalideOptions1[] = {"-ti","3","0","-2"};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
@@ -288,7 +300,7 @@ public class SimulateurTestException {
 	}
 
 	@Test
-	public void testArg22() {
+	public void testArg23() {
 		  String invalideOptions1[] = {"-ti","-1","0","1"};
 		  try {
 			  simulateur = new Simulateur(invalideOptions1);
