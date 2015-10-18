@@ -16,47 +16,52 @@ mkdir test
 echo Début du test : >> ./test/log.txt
 echo  $DATE >> ./test/log.txt
 cd ./bin
-BEFORE=$SECONDS
 
 #  RZ
-for i in {-30..20..1}
-do
-	for j in {0..9..1}
-	do
-		java simulateur.Simulateur -form RZ -snr $i.$j -test TEB -mess 4000 
-	done
-done
-
-ELAPSED1=$(($SECONDS-$BEFORE))
-echo RZ ok : >> ./test/log.txt
-echo  ELAPSED1 >> ./test/log.txt
+# for i in {30..0..-1}
+# do
+# 	for j in {9..0..-1}
+# 	do
+# 		java simulateur.Simulateur -form RZ -snr -$i.$j -test TEB -mess 4000 
+# 	done
+# done
+# for i in {0..20..1}
+# do
+# 	for j in {0..9..1}
+# 	do
+# 		java simulateur.Simulateur -form RZ -snr $i.$j -test TEB -mess 4000 
+# 	done
+# done
 
 # NRZ
-for i in {-30..20..1}
+for i in {30..0..-1}
 do
-	for j in {0..9..1}
+	for j in {9..0..-1}
 	do
-		java simulateur.Simulateur -form NRZ -snr $i.$j -test TEB -mess 4000 
+		java simulateur.Simulateur -form NRZ -snr -$i.$j -test TEB -mess 4000 
 	done
 done
-
-ELAPSED2=$(($SECONDS-$ELAPSED1))
-
-echo NRZ ok : >> ./test/log.txt
-echo  ELAPSED2 >> ./test/log.txt
+# for i in {0..20..1}
+# do
+# 	for j in {0..9..1}
+# 	do
+# 		java simulateur.Simulateur -form NRZ -snr $i.$j -test TEB -mess 4000 
+# 	done
+# done
 
 # NRZT
-for i in {-30..20..1}
+for i in {30..0..-1}
 do
-	for j in {0..9..1}
+	for j in {9..0..-1}
 	do
-		java simulateur.Simulateur -form NRZT -snr $i.$j -test TEB -mess 4000 
+		java simulateur.Simulateur -form NRZT -snr -$i.$j -test TEB -mess 4000 
 	done
 done
+# for i in {0..20..1}
+# do
+# 	for j in {0..9..1}
+# 	do
+# 		java simulateur.Simulateur -form NRZT -snr $i.$j -test TEB -mess 4000 
+# 	done
+# done
 
-ELAPSED3=$(($SECONDS-$ELAPSED2))
-ELAPSEDF1=$(($SECONDS-$BEFORE))
-echo NRZT ok : >> ./test/log.txt
-echo  ELAPSED3 >> ./test/log.txt
-echo Fase 1 ok : >> ./test/log.txt
-echo  ELAPSEDF1 >> ./test/log.txt

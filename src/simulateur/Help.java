@@ -57,7 +57,10 @@ public class Help {
   System.out.println("-h -help");
   System.out.println("premet d'afficher ce messge d'aide");
   System.out.println();
-  System.out.println("-test");
+  System.out.println("-testTEB");
+  System.out.println("Permet d'enregisterer les résultats de la simulation");
+  System.out.println("-testBruit");
   System.out.println("Permets de generer un fichier .Csv qui contient les echantillons du bruit geneges par le simulateur ne fonctionne que lorsque la transmission est bruitee");
+
  }
 }
