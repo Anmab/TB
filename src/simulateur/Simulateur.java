@@ -364,13 +364,10 @@ public class Simulateur {
 				testBruit = true;
 				testTEB = true;
 				i++;
-				if (args[i].matches("TEB")) {
+				if (args[i].matches("TEB"))
 					testBruit = false;
-				} else if(args[i].matches("Bruit")){
+				if(args[i].matches("Bruit"))
 					testTEB = false;
-				}else
-					throw new ArgumentsException(
-							"Valeur du parametre -test invalide : " + args[i]);
 				
 			} else if (args[i].matches("-help|-h")) {
 				help = true;
