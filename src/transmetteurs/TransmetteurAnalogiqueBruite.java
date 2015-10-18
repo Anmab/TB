@@ -8,12 +8,12 @@ import java.util.*;
 
 public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 	private float snr;
-	private LinkedList<Float> signalBruite;
+	private Information<Float> signalBruite;
 
 	public TransmetteurAnalogiqueBruite(float snr) {
 		super();
 		this.snr = snr;
-		signalBruite = new LinkedList();
+		signalBruite = new Information();
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 		float a1 = 0;
 		float a2 = 0;
 		float tau = 0;
-		signalBruite = new LinkedList();
+		signalBruite = new Information();
 
 		if (informationRecue == null)
 			throw new InformationNonConforme(
@@ -102,7 +102,7 @@ public class TransmetteurAnalogiqueBruite extends Transmetteur<Float, Float> {
 	/**
 	 * Fonction permettant de recuperer le signal bruite
 	 */
-	public LinkedList<Float> getBruit() {
+	public Information<Float> getBruit() {
 		return signalBruite;
 	}
 
