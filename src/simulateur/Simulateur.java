@@ -427,10 +427,8 @@ public class Simulateur {
 					try {
 						FileWriter fw = new FileWriter(f);
 
-						for (int i = 1; i < transmetteurAnalogique.getBruit()
-								.size() - 1; i++) {
-							fw.write(String.valueOf(transmetteurAnalogique
-									.getBruit().get(i)));
+						for (int i = 1; i < transmetteurAnalogique.getBruit().nbElements() - 1; i++) {
+							fw.write(String.valueOf(transmetteurAnalogique.getBruit().iemeElement(i)));
 							fw.write("\r\n");
 						}
 
