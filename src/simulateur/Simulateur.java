@@ -360,14 +360,10 @@ public class Simulateur {
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -snr invalide : " + args[i]);
-			} else if (args[i].matches("-test")) {
+			} else if (args[i].matches("-testBruit")) {
 				testBruit = true;
+			}else if (args[i].matches("-testTEB")) {
 				testTEB = true;
-				i++;
-				if (args[i].matches("TEB"))
-					testBruit = false;
-				if(args[i].matches("Bruit"))
-					testTEB = false;
 				
 			} else if (args[i].matches("-help|-h")) {
 				help = true;
