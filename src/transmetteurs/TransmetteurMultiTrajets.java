@@ -24,8 +24,7 @@ public class TransmetteurMultiTrajets extends Transmetteur<Float, Float> {
 	 *            l'information recue
 	 */
 
-	public void recevoir(Information<Float> information)
-			throws InformationNonConforme {
+	public void recevoir(Information<Float> information) throws InformationNonConforme {
 		this.informationRecue = information;
 		if (informationRecue == null)
 			throw new InformationNonConforme(
