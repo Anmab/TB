@@ -1,4 +1,4 @@
-package test;
+package testUnitaire;
 
 import static org.hamcrest.CoreMatchers.*;
 import simulateur.ArgumentsException;
