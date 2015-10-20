@@ -138,15 +138,15 @@ public class Simulateur {
 		// emmeteur-recepteurs
 		if (forme == "NRZ") {
 			emetteur = new EmetteurNrz(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurNrzV2(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurNrz(nbEch, amplMin, amplMax);
 		}
 		if (forme == "RZ") {
 			emetteur = new EmetteurRz(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurRzV2(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurRz(nbEch, amplMin, amplMax);
 		}
 		if (forme == "NRZT") {
 			emetteur = new EmetteurNrzt(nbEch, amplMin, amplMax);
-			recepteur = new RecepteurNrztV2(nbEch, amplMin, amplMax);
+			recepteur = new RecepteurNrzt(nbEch, amplMin, amplMax);
 		}
 
 		
