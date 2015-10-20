@@ -58,8 +58,8 @@ import java.util.*;
       }
    
    /**
-    * pour ajouter un �l�ment � la fin de l'information 
-    * @param valeur  l'�l�ment � rajouter
+    * pour ajouter un element a la fin de l'information 
+    * @param valeur  l'element a rajouter
     */
       public void add(T valeur) {
          this.content.add(valeur);
@@ -69,7 +69,7 @@ import java.util.*;
    /**
     * pour comparer l'information courante avec une autre information
     * @param o  l'information  avec laquelle se comparer
-    * @return "true" si les 2 informations contiennent les m�mes �l�ments aux m�mes places; "false" dans les autres cas
+    * @return "true" si les 2 informations contiennent les memes elements aux memes places; "false" dans les autres cas
     */	 
       @SuppressWarnings("unchecked")
       public boolean equals(Object o) {
