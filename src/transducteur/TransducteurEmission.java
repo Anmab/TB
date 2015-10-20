@@ -4,9 +4,9 @@ import transmetteurs.*;
 import destinations.*;
 import information.*;
 
-public class TransducteurEmission extends Transmetteur<Float, Float> {
+public class TransducteurEmission extends Transmetteur<Boolean, Boolean> {
 
-	public void recevoir(Information<Float> information) throws InformationNonConforme {
+	public void recevoir(Information<Boolean> information) throws InformationNonConforme {
 		this.informationRecue = information;
 		if (informationRecue == null) throw new InformationNonConforme(
 					"Erreur : Information non conforme");
@@ -26,18 +26,18 @@ public class TransducteurEmission extends Transmetteur<Float, Float> {
 
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
 
-			if (informationRecue.iemeElement(i) == 0) {
-				informationEmise.add((float) 0);
-				informationEmise.add((float) 1);
-				informationEmise.add((float) 0);
+			if (informationRecue.iemeElement(i) == false) {
+				informationEmise.add(false);
+				informationEmise.add(true);
+				informationEmise.add(false);
 			} else {
-				informationEmise.add((float) 1);
-				informationEmise.add((float) 0);
-				informationEmise.add((float) 1);
+				informationEmise.add(true);
+				informationEmise.add(false);
+				informationEmise.add(true);
 
 			}
 
-			for (DestinationInterface<Float> destinationConnectee : destinationsConnectees) {
+			for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) {
 				destinationConnectee.recevoir(informationEmise);
 			}
 		}
