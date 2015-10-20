@@ -9,7 +9,7 @@ echo "Compilation du programme ..."
 echo
 
 mkdir ./test
-mv ./src/test ./
+mv ./src/testUnitaire ./
 mkdir ./bin
 javac ./src/*/*.java -d ./bin
 
@@ -18,7 +18,7 @@ echo "Création de la JavaDoc ..."
 echo
 mkdir ./doc
 javadoc ./src/*/* -d doc
-mv ./test ./src/test 
+mv ./testUnitaire ./src/testUnitaire 
 echo
 echo "FIN"
 echo
