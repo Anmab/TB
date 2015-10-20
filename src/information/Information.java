@@ -21,8 +21,8 @@ import java.util.*;
    	
    
    /**
-    * pour construire � partir d'un tableau de T une information
-    * @param content le tableau d'�l�ments pour initialiser l'information construite
+    * pour construire a partir d'un tableau de T une information
+    * @param content le tableau d'elements pour initialiser l'information construite
     */
       public Information(T [] content) {
          this.content = new ArrayList <T> (); 
@@ -33,16 +33,16 @@ import java.util.*;
    
    
    /**
-    * pour conna�tre le nombre d'�l�ments d'une information
-    * @return le nombre d'�l�ments de l'information
+    * pour connaitre le nombre d'elements d'une information
+    * @return le nombre d'elements de l'information
     */
       public int nbElements() {
          return this.content.size();
       }
    
    /**
-    * pour renvoyer un �l�ment d'une information
-    * @return le ieme �l�ment de l'information
+    * pour renvoyer un element d'une information
+    * @return le ieme element de l'information
     */
       public T iemeElement(int i) {
          return this.content.get(i);
@@ -50,8 +50,8 @@ import java.util.*;
 
    
    /**
-    * pour modifier le i�me �l�ment d'une information
-    * @return le ieme �l�ment de l'information
+    * pour modifier le ieme element d'une information
+    * @return le ieme element de l'information
     */
       public void setIemeElement(int i, T v) {
          this.content.set(i, v);
