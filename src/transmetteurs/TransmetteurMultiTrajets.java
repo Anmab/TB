@@ -3,8 +3,6 @@ package transmetteurs;
 import destinations.*;
 import information.*;
 
-import java.math.*;
-import java.util.*;
 
 public class TransmetteurMultiTrajets extends Transmetteur<Float, Float> {
 
@@ -19,11 +17,11 @@ public class TransmetteurMultiTrajets extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * re�oit une information. Cette m�thode, en fin d'ex�cution, appelle la
-	 * m�thode �mettre.
+	 * recoit une information. Cette methode, en fin d'execution, appelle la
+	 * methode emettre.
 	 * 
 	 * @param information
-	 *            l'information re�ue
+	 *            l'information recue
 	 */
 
 	public void recevoir(Information<Float> information)
@@ -38,13 +36,12 @@ public class TransmetteurMultiTrajets extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * �met l'information construite par le transmetteur
+	 * emet l'information construite par le transmetteur
 	 */
 	public void emettre() throws InformationNonConforme {
 		float ech = 0;
 		if (informationRecue == null)
-			throw new InformationNonConforme(
-					"Erreur : Information non conforme");
+			throw new InformationNonConforme("Erreur : Information non conforme");
 
 		else {
 
