@@ -17,8 +17,8 @@ import recepteurs.*;
 
 /**
  * La classe Simulateur permet de construire et simuler une chaine de
- * transmission composee d'une Source, d'un nombre variable de Transmetteur(s)
- * et d'une Destination.
+ * transmission composee d'une source, d'un nombre variable de transmetteur(s)
+ * et d'une destination.
  * 
  */
 public class Simulateur {
@@ -52,24 +52,24 @@ public class Simulateur {
 	// Analogique
 	private String forme = "non";
 	/**
-	 * indique au Simulateur le type de la forme 
+	 * indique au simulateur le type de la forme 
 	 * utilise null si le signal est logique NRZ NRZT RZ
 	 */
 	private Integer nbEch = 30;
-	/** indique au Simulateur le nombre d'echantillons par symbole */
+	/** indique au simulateur le nombre d'echantillons par symbole */
 	private float amplMin = 0.0f;
-	/** indique au Simulateur l'amplitude min du signal */
+	/** indique au simulateur l'amplitude min du signal */
 	private float amplMax = 1.0f;
-	/** indique au Simulateur l'amplitude max du signal */
+	/** indique au simulateur l'amplitude max du signal */
 
 	private Transmetteur<Float, Float> transmetteurAnalogique = null;
 	/**
-	 * le composant Transmetteur parfait Analogique de la chaine de transmission
+	 * le composant transmetteur parfait analogique de la chaine de transmission
 	 */
 	private Transmetteur<Boolean, Float> emetteur = null;
-	/** le composant emetteur parfait Analogique de la chaine de transmission */
+	/** le composant emetteur parfait analogique de la chaine de transmission */
 	private Transmetteur<Float, Boolean> recepteur = null;
-	/** le composant recepteur parfait Analogique de la chaine de transmission */
+	/** le composant recepteur parfait analogique de la chaine de transmission */
 
 	// Signal bruite
 	private float snr = 0.0f;
@@ -80,7 +80,7 @@ public class Simulateur {
 	/** indique au simulateur s'il doit generer des fichier de test */
 
 	private boolean help = false;
-	/** indique au Simulateur s'il doit afficher une page d'aide*/
+	/** indique au simulateur s'il doit afficher une page d'aide*/
 	
 	//multitrajet
 	private float ampliRelative[] = new float[5];
@@ -89,14 +89,14 @@ public class Simulateur {
 	
 	private Transmetteur<Float, Float> transmetteurMultiTrajets = null;
 	/**
-	 * le composant Transmetteur parfait Analogique de la chaine de transmission
+	 * le composant transmetteur parfait analogique de la chaine de transmission
 	 */
 	/**
-	 * Le constructeur de Simulateur construit une chaine de transmission
-	 * composee d'une Source <Boolean>, d'une Destination <Boolean> et de
-	 * Transmetteur(s) [voir la methode analyseArguments]... <br>
+	 * Le constructeur de simulateur construit une chaine de transmission
+	 * composee d'une source <Boolean>, d'une destination <Boolean> et de
+	 * transmetteur(s) [voir la methode analyseArguments]... <br>
 	 * Les differents composants de la chaine de transmission (Source,
-	 * Transmetteur(s), Destination, Sonde(s) de visualisation) sont crees et
+	 * Transmetteur(s), Destination, sonde(s) de visualisation) sont crees et
 	 * connectes.
 	 * 
 	 * @param args
@@ -148,9 +148,7 @@ public class Simulateur {
 			emetteur = new EmetteurNrzt(nbEch, amplMin, amplMax);
 			recepteur = new RecepteurNrztV2(nbEch, amplMin, amplMax);
 		}
-
-		
-		
+	
 		// Connections
 		if (forme == "non") {
 			// Logique
@@ -164,7 +162,8 @@ public class Simulateur {
 				source.connecter(soundeLogique1);
 				transmetteurLogique.connecter(soundeLogique2);
 			}
-		} else if (nTrajet != 0) {
+		} 
+		else if (nTrajet != 0) {
 			// Analogique avec multi trajet
 			source.connecter(emetteur);
 			emetteur.connecter(transmetteurMultiTrajets);
@@ -188,7 +187,8 @@ public class Simulateur {
 				transmetteurAnalogique.connecter(soundeanalogique2);	
 				transmetteurMultiTrajets.connecter(soundeanalogique3);
 			}
-		}else if(nTrajet == 0){
+		}
+		else if(nTrajet == 0){
 			// Analogique sans multi trajet
 			source.connecter(emetteur);
 			emetteur.connecter(transmetteurAnalogique);
@@ -214,7 +214,7 @@ public class Simulateur {
 	/**
 	 * La methode analyseArguments extrait d'un tableau de chaines de caracteres
 	 * les differentes options de la simulation. Elle met a jour les attributs
-	 * du Simulateur.
+	 * du simulateur.
 	 * 
 	 * @param args
 	 *            le tableau des differents arguments. <br>
