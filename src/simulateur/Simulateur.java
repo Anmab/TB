@@ -310,7 +310,8 @@ public class Simulateur {
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -mess invalide : " + args[i]);
-			} else if (args[i].matches("-form")) {
+			} 
+			else if (args[i].matches("-form")) {
 				i++;
 				if (args[i].matches("NRZ")) {
 					forme = "NRZ";
@@ -335,7 +336,8 @@ public class Simulateur {
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -nbEch invalide : " + args[i]);
-			} else if (args[i].matches("-ampl")) {
+			} 
+			else if (args[i].matches("-ampl")) {
 				i++;
 				if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")) {
 					amplMin = new Float(args[i]);
@@ -353,21 +355,25 @@ public class Simulateur {
 					throw new ArgumentsException(
 							"Valeur du parametre -ampl invalide : " + args[i]);
 				}
-			} else if (args[i].matches("-snr")) {
+			} 
+			else if (args[i].matches("-snr")) {
 				i++;
 				if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")) {
 					snr = new Float(args[i]);
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -snr invalide : " + args[i]);
-			} else if (args[i].matches("-testBruit")) {
+			} 
+			else if (args[i].matches("-testBruit")) {
 				testBruit = true;
-			}else if (args[i].matches("-testTEB")) {
-				testTEB = true;
-				
-			} else if (args[i].matches("-help|-h")) {
+			}
+			else if (args[i].matches("-testTEB")) {
+				testTEB = true;	
+			} 
+			else if (args[i].matches("-help|-h")) {
 				help = true;
-			} else if (args[i].matches("-ti")) {
+			}
+			else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[1-5]")) {
 					//i = nbTrajet
@@ -392,7 +398,12 @@ public class Simulateur {
 				else {
 					throw new ArgumentsException("Valeur du parametre -ti i invalide : " + args[i]);
 				}
-			} else
+			} 
+			else if (args[i].matches("-simulateur")) {
+				
+			}
+			
+			else
 				throw new ArgumentsException("Option invalide :" + args[i]);
 		}
 
