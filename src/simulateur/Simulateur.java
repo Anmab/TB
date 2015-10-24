@@ -399,7 +399,7 @@ public class Simulateur {
 					throw new ArgumentsException("Valeur du parametre -ti i invalide : " + args[i]);
 				}
 			} 
-			else if (args[i].matches("-simulateur")) {
+			else if (args[i].matches("-transducteur")) {
 				
 			}
 			
