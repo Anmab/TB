@@ -88,8 +88,14 @@ public class Simulateur {
 	private int nTrajet=0;
 	
 	private Transmetteur<Float, Float> transmetteurMultiTrajets = null;
+	
+	// Transducteurs
+	private boolean transducteur = false;
+	private Transmetteur<Boolean, Boolean> transducteurEmission;
+	private Transmetteur<Boolean, Boolean> transducteurReception;
+	
 	/**
-	 * le composant transmetteur parfait analogique de la chaine de transmission
+	 * Le composant transmetteur parfait analogique de la chaine de transmission
 	 */
 	/**
 	 * Le constructeur de simulateur construit une chaine de transmission
@@ -108,7 +114,7 @@ public class Simulateur {
 	 */
 	public Simulateur(String[] args) throws ArgumentsException {
 
-		analyseArguments(args); // analyser et recuperer les arguments
+		analyseArguments(args); // analyse et recupere les arguments
 		// Source
 		if (messageAleatoire == true && aleatoireAvecGerme == false) {
 			// Source aleatoire sans seed
@@ -119,7 +125,7 @@ public class Simulateur {
 			source = new SourceAleatoire(nbBitsMess, seed);
 		}
 		if (messageAleatoire == false) {
-			// Soruce fix
+			// Source fixe
 			source = new SourceFixe(messageString);
 		}
 		// Transmetteur
@@ -208,6 +214,14 @@ public class Simulateur {
 				emetteur.connecter(soundeanalogique1);
 				transmetteurAnalogique.connecter(soundeanalogique2);		
 			}
+		}
+		else if (transducteur == true){
+			source.connecter(transducteurEmission);
+			transducteurEmission.connecter(emetteur);
+			emetteur.connecter(transmetteurAnalogique);
+			transmetteurAnalogique.connecter(recepteur);
+			recepteur.connecter(transducteurReception);		
+			transducteurReception.connecter(destination);
 		}
 	}
 
@@ -400,7 +414,7 @@ public class Simulateur {
 				}
 			} 
 			else if (args[i].matches("-transducteur")) {
-				
+				transducteur = true;
 			}
 			
 			else
