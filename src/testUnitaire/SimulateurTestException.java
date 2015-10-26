@@ -156,7 +156,7 @@ public class SimulateurTestException {
 
 	@Test
 	public void nbEchChar() {
-		String invalideOptions1[] = { "-nbEch", "NRR" };
+		String invalideOptions1[] = { "-nbEch", "NRR","-form","NRZ" };
 		try {
 			simulateur = new Simulateur(invalideOptions1);
 		} catch (ArgumentsException e) {
@@ -167,7 +167,7 @@ public class SimulateurTestException {
 
 	@Test
 	public void nbCharTooLongNum() {
-		String invalideOptions1[] = { "-nbEch", "999999" };
+		String invalideOptions1[] = { "-nbEch", "999999","-form","NRZ" };
 		try {
 			simulateur = new Simulateur(invalideOptions1);
 		} catch (ArgumentsException e) {
@@ -178,7 +178,7 @@ public class SimulateurTestException {
 
 	@Test
 	public void nbCharZero() {
-		String invalideOptions1[] = { "-nbEch", "0" };
+		String invalideOptions1[] = { "-nbEch", "0","-form","NRZ" };
 		try {
 			simulateur = new Simulateur(invalideOptions1);
 		} catch (ArgumentsException e) {
@@ -189,7 +189,17 @@ public class SimulateurTestException {
 
 	@Test
 	public void nbCharNull() {
-		String invalideOptions1[] = { "-nbEch", " " };
+		String invalideOptions1[] = { "-nbEch", " ","-form","NRZ" };
+		try {
+			simulateur = new Simulateur(invalideOptions1);
+		} catch (ArgumentsException e) {
+			validite = true;
+		}
+		collector.checkThat(valider(validite), is(true));
+	}
+	@Test
+	public void NbEchNullForm() {
+		String invalideOptions1[] = { "-nbEch", "15"};
 		try {
 			simulateur = new Simulateur(invalideOptions1);
 		} catch (ArgumentsException e) {
@@ -388,6 +398,66 @@ public class SimulateurTestException {
 	@Test
 	public void titdFloat() {
 		String invalideOptions1[] = { "-form", "NRZ", "-ti", "1", "2.1", "2" };
+		try {
+			simulateur = new Simulateur(invalideOptions1);
+		} catch (ArgumentsException e) {
+			validite = true;
+		}
+		collector.checkThat(valider(validite), is(true));
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	//			Transducteur
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	@Test
+	public void Transducteur() {
+		String invalideOptions1[] = { "-transducteur",""};
+		try {
+			simulateur = new Simulateur(invalideOptions1);
+		} catch (ArgumentsException e) {
+			validite = true;
+		}
+		collector.checkThat(valider(validite), is(true));
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	//			test
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	@Test
+	public void testBruit() {
+		String invalideOptions1[] = { "-testBruit",""};
+		try {
+			simulateur = new Simulateur(invalideOptions1);
+		} catch (ArgumentsException e) {
+			validite = true;
+		}
+		collector.checkThat(valider(validite), is(true));
+	}
+	@Test
+	public void testSNR() {
+		String invalideOptions1[] = { "-testSNR",""};
+		try {
+			simulateur = new Simulateur(invalideOptions1);
+		} catch (ArgumentsException e) {
+			validite = true;
+		}
+		collector.checkThat(valider(validite), is(true));
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	//			help
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	@Test
+	public void h() {
+		String invalideOptions1[] = { "-h",""};
+		try {
+			simulateur = new Simulateur(invalideOptions1);
+		} catch (ArgumentsException e) {
+			validite = true;
+		}
+		collector.checkThat(valider(validite), is(true));
+	}
+	@Test
+	public void help() {
+		String invalideOptions1[] = { "-help",""};
 		try {
 			simulateur = new Simulateur(invalideOptions1);
 		} catch (ArgumentsException e) {

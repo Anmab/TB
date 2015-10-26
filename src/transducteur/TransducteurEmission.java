@@ -36,10 +36,9 @@ public class TransducteurEmission extends Transmetteur<Boolean, Boolean> {
 				informationEmise.add(true);
 
 			}
-
-			for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) {
-				destinationConnectee.recevoir(informationEmise);
-			}
+		}
+		for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) {
+			destinationConnectee.recevoir(informationEmise);
 		}
 	}
 
