@@ -5,7 +5,7 @@ import destinations.*;
 import transmetteurs.*;
 import information.*;
 import visualisations.*;
-
+import transducteur.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,8 +17,8 @@ import recepteurs.*;
 
 /**
  * La classe Simulateur permet de construire et simuler une chaine de
- * transmission composee d'une source, d'un nombre variable de transmetteur(s)
- * et d'une destination.
+ * transmission composee d'une Source, d'un nombre variable de Transmetteur(s)
+ * et d'une Destination.
  * 
  */
 public class Simulateur {
@@ -52,24 +52,24 @@ public class Simulateur {
 	// Analogique
 	private String forme = "non";
 	/**
-	 * indique au simulateur le type de la forme 
-	 * utilise null si le signal est logique NRZ NRZT RZ
+	 * indique au Simulateur le type de la forme utilise null si le signal est
+	 * logique NRZ NRZT RZ
 	 */
 	private Integer nbEch = 30;
-	/** indique au simulateur le nombre d'echantillons par symbole */
+	/** indique au Simulateur le nombre d'echantillons par symbole */
 	private float amplMin = 0.0f;
-	/** indique au simulateur l'amplitude min du signal */
+	/** indique au Simulateur l'amplitude min du signal */
 	private float amplMax = 1.0f;
-	/** indique au simulateur l'amplitude max du signal */
+	/** indique au Simulateur l'amplitude max du signal */
 
 	private Transmetteur<Float, Float> transmetteurAnalogique = null;
 	/**
-	 * le composant transmetteur parfait analogique de la chaine de transmission
+	 * le composant Transmetteur parfait Analogique de la chaine de transmission
 	 */
 	private Transmetteur<Boolean, Float> emetteur = null;
-	/** le composant emetteur parfait analogique de la chaine de transmission */
+	/** le composant emetteur parfait Analogique de la chaine de transmission */
 	private Transmetteur<Float, Boolean> recepteur = null;
-	/** le composant recepteur parfait analogique de la chaine de transmission */
+	/** le composant recepteur parfait Analogique de la chaine de transmission */
 
 	// Signal bruite
 	private float snr = 0.0f;
@@ -80,29 +80,29 @@ public class Simulateur {
 	/** indique au simulateur s'il doit generer des fichier de test */
 
 	private boolean help = false;
-	/** indique au simulateur s'il doit afficher une page d'aide*/
-	
-	//multitrajet
+	/** indique au Simulateur s'il doit afficher une page d'aide */
+
+	// multitrajet
 	private float ampliRelative[] = new float[5];
 	private int decalage[] = new int[5];
-	private int nTrajet=0;
-	
+	private int nTrajet = 0;
+
 	private Transmetteur<Float, Float> transmetteurMultiTrajets = null;
-	
-	// Transducteurs
+
+	// transducteur
 	private boolean transducteur = false;
-	private Transmetteur<Boolean, Boolean> transducteurEmission;
-	private Transmetteur<Boolean, Boolean> transducteurReception;
-	
+	private Transmetteur<Boolean, Boolean> transducteurEmission = null;
+	private Transmetteur<Boolean, Boolean> transducteurReception = null;
+
 	/**
-	 * Le composant transmetteur parfait analogique de la chaine de transmission
+	 * le composant Transmetteur parfait Analogique de la chaine de transmission
 	 */
 	/**
-	 * Le constructeur de simulateur construit une chaine de transmission
-	 * composee d'une source <Boolean>, d'une destination <Boolean> et de
-	 * transmetteur(s) [voir la methode analyseArguments]... <br>
+	 * Le constructeur de Simulateur construit une chaine de transmission
+	 * composee d'une Source <Boolean>, d'une Destination <Boolean> et de
+	 * Transmetteur(s) [voir la methode analyseArguments]... <br>
 	 * Les differents composants de la chaine de transmission (Source,
-	 * Transmetteur(s), Destination, sonde(s) de visualisation) sont crees et
+	 * Transmetteur(s), Destination, Sonde(s) de visualisation) sont crees et
 	 * connectes.
 	 * 
 	 * @param args
@@ -114,7 +114,7 @@ public class Simulateur {
 	 */
 	public Simulateur(String[] args) throws ArgumentsException {
 
-		analyseArguments(args); // analyse et recupere les arguments
+		analyseArguments(args); // analyser et recuperer les arguments
 		// Source
 		if (messageAleatoire == true && aleatoireAvecGerme == false) {
 			// Source aleatoire sans seed
@@ -125,110 +125,185 @@ public class Simulateur {
 			source = new SourceAleatoire(nbBitsMess, seed);
 		}
 		if (messageAleatoire == false) {
-			// Source fixe
+			// Soruce fix
 			source = new SourceFixe(messageString);
 		}
 		// Transmetteur
-		if (forme == "non") {
+		if (forme.equals("non")) {
 			transmetteurLogique = new TransmetteurParfaitLogique();
 		} else {
 			if (snr == 0)
 				transmetteurAnalogique = new TransmetteurParfaitAnalogique();
-			else{
+			else {
 				transmetteurAnalogique = new TransmetteurAnalogiqueBruite(snr);
 			}
-			transmetteurMultiTrajets = new TransmetteurMultiTrajets(ampliRelative, decalage);
+			transmetteurMultiTrajets = new TransmetteurMultiTrajets(
+					ampliRelative, decalage);
 		}
 		// Destination
 		destination = new DestinationFinale();
 		// emmeteur-recepteurs
-		if (forme == "NRZ") {
+		if (forme.equals("NRZ")) {
 			emetteur = new EmetteurNrz(nbEch, amplMin, amplMax);
 			recepteur = new RecepteurNrzV2(nbEch, amplMin, amplMax);
 		}
-		if (forme == "RZ") {
-			emetteur = new EmetteurRz(nbEch, amplMin, amplMax);
+		if (forme.equals("RZ")) {
+			emetteur = new EmetteurRzV2(nbEch, amplMin, amplMax);
 			recepteur = new RecepteurRzV2(nbEch, amplMin, amplMax);
 		}
-		if (forme == "NRZT") {
+		if (forme.equals("NRZT")) {
 			emetteur = new EmetteurNrzt(nbEch, amplMin, amplMax);
 			recepteur = new RecepteurNrztV2(nbEch, amplMin, amplMax);
 		}
-	
+		if (transducteur) {
+			transducteurEmission = new TransducteurEmission();
+			transducteurReception = new TransducteurReception();
+		}
+
 		// Connections
-		if (forme == "non") {
+		if (forme.equals("non")) {
 			// Logique
-			source.connecter(transmetteurLogique);
-			transmetteurLogique.connecter(destination);
-			if (affichage == true) {
-				SondeLogique soundeLogique1 = new SondeLogique(
-						"Sonde Logique : Source", 1920);
-				SondeLogique soundeLogique2 = new SondeLogique(
-						"Sonde Logique : Destination", 1920);
-				source.connecter(soundeLogique1);
-				transmetteurLogique.connecter(soundeLogique2);
+			if (transducteur) {
+				source.connecter(transducteurEmission);
+				transducteurEmission.connecter(transmetteurLogique);
+				transmetteurLogique.connecter(transducteurReception);
+				transducteurReception.connecter(destination);
+			} else {
+				source.connecter(transmetteurLogique);
+				transmetteurLogique.connecter(destination);
 			}
-		} 
-		else if (nTrajet != 0) {
+
+			if (affichage == true) {
+				if (transducteur) {
+					SondeLogique soundeLogique1 = new SondeLogique(
+							"Sonde Logique : Source", 1920);
+					SondeLogique soundeLogique2 = new SondeLogique(
+							"Sonde Logique : Destination", 1920);
+					SondeLogique soundeLogiqueT1 = new SondeLogique(
+							"Sonde Logique : Transducteur Emission", 1920);
+					SondeLogique soundeLogiqueT2 = new SondeLogique(
+							"Sonde Logique : Transducteur Reception", 1920);
+					source.connecter(soundeLogique1);
+					transducteurEmission.connecter(soundeLogiqueT1);
+					transmetteurLogique.connecter(soundeLogiqueT2);
+					transducteurReception.connecter(soundeLogique2);
+				}
+				else{
+					SondeLogique soundeLogique1 = new SondeLogique(
+							"Sonde Logique : Source", 1920);
+					SondeLogique soundeLogique2 = new SondeLogique(
+							"Sonde Logique : Destination", 1920);
+					source.connecter(soundeLogique1);
+					transmetteurLogique.connecter(soundeLogique2);
+				}
+
+			}
+
+		} else if (nTrajet != 0) {
 			// Analogique avec multi trajet
-			source.connecter(emetteur);
-			emetteur.connecter(transmetteurMultiTrajets);
-			transmetteurMultiTrajets.connecter(transmetteurAnalogique);
-			transmetteurAnalogique.connecter(recepteur);
-			recepteur.connecter(destination);
-			if (affichage == true) {
-				SondeLogique soundeLogique1 = new SondeLogique(
-						"Sonde Logique : Source", 1920);
-				SondeLogique soundeLogique2 = new SondeLogique(
-						"Sonde Logique : Destination", 1920);
-				SondeAnalogique soundeanalogique1 = new SondeAnalogique(
-						"Sonde Analogique : Sortie de l'emetteur (entree du canal de transmission");
-				SondeAnalogique soundeanalogique2 = new SondeAnalogique(
-						"Sonde Analogique : Sortie du canal de transmission (entree du recepteur)");
-				SondeAnalogique soundeanalogique3 = new SondeAnalogique(
-						"Sonde Analogique : correspond au multi-trajet");
-				source.connecter(soundeLogique1);
-				recepteur.connecter(soundeLogique2);
-				emetteur.connecter(soundeanalogique1);
-				transmetteurAnalogique.connecter(soundeanalogique2);	
-				transmetteurMultiTrajets.connecter(soundeanalogique3);
+			if (transducteur) {
+				source.connecter(transducteurEmission);
+				transducteurEmission.connecter(emetteur);
+				emetteur.connecter(transmetteurMultiTrajets);
+				transmetteurMultiTrajets.connecter(transmetteurAnalogique);
+				transmetteurAnalogique.connecter(recepteur);
+				recepteur.connecter(transducteurReception);
+				transducteurReception.connecter(destination);
+
+				if (affichage == true) {
+					SondeLogique sondSource = new SondeLogique("Sonde Logique : Source", 1920);
+					source.connecter(sondSource);
+					SondeLogique soundeLogiqueT1 = new SondeLogique("Sonde Logique : Transducteur Emission", 1920);
+					transducteurEmission.connecter(soundeLogiqueT1);
+					SondeAnalogique soundeanalogique1 = new SondeAnalogique("Sonde Analogique : Sortie de l'émetteur");
+					emetteur.connecter(soundeanalogique1);
+					SondeAnalogique soundeanalogique3 = new SondeAnalogique("Sonde Analogique : correspond au multi-trajet");
+					transmetteurMultiTrajets.connecter(soundeanalogique3);
+					SondeAnalogique soundeanalogique2 = new SondeAnalogique("Sonde Analogique : Sortie du canal de transmission");
+					transmetteurAnalogique.connecter(soundeanalogique2);
+					SondeLogique soundeLogique2 = new SondeLogique("Sonde Logique : Transducteur Reception", 1920);
+					recepteur.connecter(soundeLogique2);
+					SondeLogique sondeDestination = new SondeLogique("Sonde Logique : Destination", 1920);
+					transducteurReception.connecter(sondeDestination);
+				}
 			}
-		}
-		else if(nTrajet == 0){
-			// Analogique sans multi trajet
-			source.connecter(emetteur);
-			emetteur.connecter(transmetteurAnalogique);
-			transmetteurAnalogique.connecter(recepteur);
-			recepteur.connecter(destination);
-			if (affichage == true) {
-				SondeLogique soundeLogique1 = new SondeLogique(
-						"Sonde Logique : Source", 1920);
-				SondeLogique soundeLogique2 = new SondeLogique(
-						"Sonde Logique : Destination", 1920);
-				SondeAnalogique soundeanalogique1 = new SondeAnalogique(
-						"Sonde Analogique : Sortie de l'émetteur");
-				SondeAnalogique soundeanalogique2 = new SondeAnalogique(
-						"Sonde Analogique : Sortie du canal de transmission");
-				source.connecter(soundeLogique1);
-				recepteur.connecter(soundeLogique2);
-				emetteur.connecter(soundeanalogique1);
-				transmetteurAnalogique.connecter(soundeanalogique2);		
+
+			else {
+				source.connecter(emetteur);
+				emetteur.connecter(transmetteurMultiTrajets);
+				transmetteurMultiTrajets.connecter(transmetteurAnalogique);
+				transmetteurAnalogique.connecter(recepteur);
+				recepteur.connecter(destination);
+				if (affichage == true) {
+					SondeLogique soundeLogique1 = new SondeLogique(
+							"Sonde Logique : Source", 1920);
+					SondeLogique soundeLogique2 = new SondeLogique(
+							"Sonde Logique : Destination", 1920);
+					SondeAnalogique soundeanalogique1 = new SondeAnalogique(
+							"Sonde Analogique : Sortie de l'emetteur (entree du canal de transmission");
+					SondeAnalogique soundeanalogique2 = new SondeAnalogique(
+							"Sonde Analogique : Sortie du canal de transmission (entree du recepteur)");
+					SondeAnalogique soundeanalogique3 = new SondeAnalogique(
+							"Sonde Analogique : correspond au multi-trajet");
+					source.connecter(soundeLogique1);
+					recepteur.connecter(soundeLogique2);
+					emetteur.connecter(soundeanalogique1);
+					transmetteurAnalogique.connecter(soundeanalogique2);
+					transmetteurMultiTrajets.connecter(soundeanalogique3);
+				}
 			}
-		}
-		else if (transducteur == true){
-			source.connecter(transducteurEmission);
-			transducteurEmission.connecter(emetteur);
-			emetteur.connecter(transmetteurAnalogique);
-			transmetteurAnalogique.connecter(recepteur);
-			recepteur.connecter(transducteurReception);		
-			transducteurReception.connecter(destination);
+		} else if (nTrajet == 0) {
+			if (transducteur) {
+				// Analogique sans multi trajet
+				source.connecter(transducteurEmission);
+				transducteurEmission.connecter(emetteur);
+				emetteur.connecter(transmetteurAnalogique);
+				transmetteurAnalogique.connecter(recepteur);
+				recepteur.connecter(transducteurReception);
+				transducteurReception.connecter(destination);
+
+				if (affichage == true) {
+					SondeLogique sondSource = new SondeLogique("Sonde Logique : Source", 1920);
+					source.connecter(sondSource);
+					SondeLogique soundeLogiqueT1 = new SondeLogique("Sonde Logique : Transducteur Emission", 1920);
+					transducteurEmission.connecter(soundeLogiqueT1);
+					SondeAnalogique soundeanalogique1 = new SondeAnalogique("Sonde Analogique : Sortie de l'émetteur");
+					emetteur.connecter(soundeanalogique1);
+					SondeAnalogique soundeanalogique2 = new SondeAnalogique("Sonde Analogique : Sortie du canal de transmission");
+					transmetteurAnalogique.connecter(soundeanalogique2);
+					SondeLogique soundeLogique2 = new SondeLogique("Sonde Logique : Transducteur Reception", 1920);
+					recepteur.connecter(soundeLogique2);
+					SondeLogique sondeDestination = new SondeLogique("Sonde Logique : Destination", 1920);
+					transducteurReception.connecter(sondeDestination);
+				}
+			} else {
+				source.connecter(emetteur);
+				emetteur.connecter(transmetteurAnalogique);
+				transmetteurAnalogique.connecter(recepteur);
+				recepteur.connecter(destination);
+				if (affichage == true) {
+					SondeLogique soundeLogique1 = new SondeLogique(
+							"Sonde Logique : Source", 1920);
+					SondeLogique soundeLogique2 = new SondeLogique(
+							"Sonde Logique : Destination", 1920);
+					SondeAnalogique soundeanalogique1 = new SondeAnalogique(
+							"Sonde Analogique : Sortie de l'émetteur");
+					SondeAnalogique soundeanalogique2 = new SondeAnalogique(
+							"Sonde Analogique : Sortie du canal de transmission");
+					source.connecter(soundeLogique1);
+					recepteur.connecter(soundeLogique2);
+					emetteur.connecter(soundeanalogique1);
+					transmetteurAnalogique.connecter(soundeanalogique2);
+				}
+
+			}
 		}
 	}
 
 	/**
 	 * La methode analyseArguments extrait d'un tableau de chaines de caracteres
 	 * les differentes options de la simulation. Elle met a jour les attributs
-	 * du simulateur.
+	 * du Simulateur.
 	 * 
 	 * @param args
 	 *            le tableau des differents arguments. <br>
@@ -324,8 +399,7 @@ public class Simulateur {
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -mess invalide : " + args[i]);
-			} 
-			else if (args[i].matches("-form")) {
+			} else if (args[i].matches("-form")) {
 				i++;
 				if (args[i].matches("NRZ")) {
 					forme = "NRZ";
@@ -350,8 +424,7 @@ public class Simulateur {
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -nbEch invalide : " + args[i]);
-			} 
-			else if (args[i].matches("-ampl")) {
+			} else if (args[i].matches("-ampl")) {
 				i++;
 				if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")) {
 					amplMin = new Float(args[i]);
@@ -369,67 +442,64 @@ public class Simulateur {
 					throw new ArgumentsException(
 							"Valeur du parametre -ampl invalide : " + args[i]);
 				}
-			} 
-			else if (args[i].matches("-snr")) {
+			} else if (args[i].matches("-snr")) {
 				i++;
 				if (args[i].matches("^[+-]?[0-9]+(.?[0-9]*)?")) {
 					snr = new Float(args[i]);
 				} else
 					throw new ArgumentsException(
 							"Valeur du parametre -snr invalide : " + args[i]);
-			} 
-			else if (args[i].matches("-testBruit")) {
+			} else if (args[i].matches("-testBruit")) {
 				testBruit = true;
-			}
-			else if (args[i].matches("-testTEB")) {
-				testTEB = true;	
-			} 
-			else if (args[i].matches("-help|-h")) {
+			} else if (args[i].matches("-testTEB")) {
+				testTEB = true;
+			} else if (args[i].matches("-transducteur")) {
+				transducteur = true;
+			} else if (args[i].matches("-help|-h")) {
 				help = true;
-			}
-			else if (args[i].matches("-ti")) {
+			} else if (args[i].matches("-ti")) {
 				i++;
 				if (args[i].matches("[1-5]")) {
-					//i = nbTrajet
+					// i = nbTrajet
 					nTrajet = new Integer(args[i]);
 					i++;
 					if (args[i].matches("[0-9]+")) {
-						//dt = decalage
-						decalage[nTrajet-1] = new Integer(args[i]);
+						// dt = decalage
+						decalage[nTrajet - 1] = new Integer(args[i]);
 						i++;
-					}
-					else{
-						throw new ArgumentsException("Valeur du parametre -ti i dt invalide : " + args[i]);
+					} else {
+						throw new ArgumentsException(
+								"Valeur du parametre -ti i dt invalide : "
+										+ args[i]);
 					}
 					if (args[i].matches("[0-9]+(.?[0-9]*)?")) {
-						//ar = ampliRelative
-						ampliRelative[nTrajet-1] = new Float(args[i]);	
+						// ar = ampliRelative
+						ampliRelative[nTrajet - 1] = new Float(args[i]);
+					} else {
+						throw new ArgumentsException(
+								"Valeur du parametre -ti i dt ar invalide : "
+										+ args[i]);
 					}
-					else{
-						throw new ArgumentsException("Valeur du parametre -ti i dt ar invalide : " + args[i]);
-					}
+				} else {
+					throw new ArgumentsException(
+							"Valeur du parametre -ti i invalide : " + args[i]);
 				}
-				else {
-					throw new ArgumentsException("Valeur du parametre -ti i invalide : " + args[i]);
-				}
-			} 
-			else if (args[i].matches("-transducteur")) {
-				transducteur = true;
-			}
-			
-			else
+			} else
 				throw new ArgumentsException("Option invalide :" + args[i]);
 		}
 
 		// Condition final
-		if (forme=="non" && nTrajet != 0 ){
-			throw new ArgumentsException("L'option -ti (le multitrajet) ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
+		if (forme == "non" && nTrajet != 0) {
+			throw new ArgumentsException(
+					"L'option -ti (le multitrajet) ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
 		}
-		if (forme=="non" && snr != 0 ){
-			throw new ArgumentsException("L'option -snr  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
+		if (forme == "non" && snr != 0) {
+			throw new ArgumentsException(
+					"L'option -snr  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
 		}
-		if (forme == "non" && nbEch != 30  ){
-			throw new ArgumentsException("L'option -nbEch  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
+		if (forme == "non" && nbEch != 30) {
+			throw new ArgumentsException(
+					"L'option -nbEch  ne peut etre faite sur un signal logique, ajouter -form [RZ,NRZ,NRZT]");
 		}
 	}
 
@@ -452,8 +522,10 @@ public class Simulateur {
 					try {
 						FileWriter fw = new FileWriter(f);
 
-						for (int i = 1; i < transmetteurAnalogique.getBruit().nbElements() - 1; i++) {
-							fw.write(String.valueOf(transmetteurAnalogique.getBruit().iemeElement(i)));
+						for (int i = 1; i < transmetteurAnalogique.getBruit()
+								.nbElements() - 1; i++) {
+							fw.write(String.valueOf(transmetteurAnalogique
+									.getBruit().iemeElement(i)));
 							fw.write("\r\n");
 						}
 
@@ -469,8 +541,9 @@ public class Simulateur {
 	}
 
 	/**
-	 * La methode calculTauxErreurBinaire permet de calculer le Taux d'erreur Binaire d'une ligne de transmission
-	 * Entre le source et la destination finale
+	 * La methode calculTauxErreurBinaire permet de calculer le Taux d'erreur
+	 * Binaire d'une ligne de transmission Entre le source et la destination
+	 * finale
 	 * 
 	 * @return Le TRB (Float)
 	 */
@@ -497,9 +570,10 @@ public class Simulateur {
 		// retourne le TEB
 		return ((float) nbBitFaux / (float) messageON.nbElements());
 	}
+
 	/**
-	 * La fonction main instancie un Simulateur a l'aide des arguments
-	 * passes en parametre et affiche le resultat de l'execution d'une transmission.
+	 * La fonction main instancie un Simulateur a l'aide des arguments passes en
+	 * parametre et affiche le resultat de l'execution d'une transmission.
 	 * 
 	 * @param args
 	 *            les differents arguments qui serviront a l'instanciation du
@@ -520,10 +594,9 @@ public class Simulateur {
 			System.out.println(e);
 			System.exit(-1);
 		}
-		if (simulateur.help == true){
+		if (simulateur.help == true) {
 			Help help = new Help();
-		}
-		else{
+		} else {
 			try {
 				simulateur.execute();
 				float tauxErreurBinaire = simulateur.calculTauxErreurBinaire();
@@ -532,20 +605,22 @@ public class Simulateur {
 					s += args[i] + "  ";
 				}
 				System.out.println(s + "  =>   TEB : " + tauxErreurBinaire);
-				if(simulateur.testTEB){
+				if (simulateur.testTEB) {
 					try {
 						String TEBstring = String.valueOf(tauxErreurBinaire);
-					    BufferedWriter out = new BufferedWriter(new FileWriter("../test/TEB.csv", true));
-					    out.write(simulateur.snr +";"+simulateur.forme+";"+ TEBstring+"\r\n");
-					    out.close();
-					}
-					catch (IOException exception) {
-						System.out.println("Erreur lors de l'écriture de TEB : "
-								+ exception.getMessage());
-					
+						BufferedWriter out = new BufferedWriter(new FileWriter(
+								"../test/TEB.csv", true));
+						out.write(simulateur.snr + ";" + simulateur.forme + ";"
+								+ TEBstring + "\r\n");
+						out.close();
+					} catch (IOException exception) {
+						System.out
+								.println("Erreur lors de l'écriture de TEB : "
+										+ exception.getMessage());
+
 					}
 				}
-				
+
 			} catch (Exception e) {
 				System.out.println(e);
 				e.printStackTrace();

@@ -24,14 +24,14 @@ for i in {40..0..-1}
 do
 	for j in {9..0..-1}
 	do
-		java simulateur.Simulateur -form RZ -snr -$i.$j -testTEB -mess 9999 
+		java simulateur.Simulateur -form RZ -snr -$i.$j -testTEB -mess 99999 -transducteur
 	done
 done
 for i in {0..25..1}
 do
 	for j in {0..9..1}
 	do
-		java simulateur.Simulateur -form RZ -snr $i.$j -testTEB -mess 9999
+		java simulateur.Simulateur -form RZ -snr $i.$j -testTEB -mess 99999 -transducteur
 	done
 done
 
@@ -40,14 +40,14 @@ for i in {40..0..-1}
 do
 	for j in {9..0..-1}
 	do
-		java simulateur.Simulateur -form NRZ -snr -$i.$j -testTEB -mess 9999
+		java simulateur.Simulateur -form NRZ -snr -$i.$j -testTEB -mess 99999 -transducteur
 	done
 done
 for i in {0..25..1}
 do
 	for j in {0..9..1}
 	do
-		java simulateur.Simulateur -form NRZ -snr $i.$j -testTEB -mess 9999
+		java simulateur.Simulateur -form NRZ -snr $i.$j -testTEB -mess 99999 -transducteur
 	done
 done
 
@@ -56,14 +56,60 @@ for i in {40..0..-1}
 do
 	for j in {9..0..-1}
 	do
-		java simulateur.Simulateur -form NRZT -snr -$i.$j -testTEB -mess 9999
+		java simulateur.Simulateur -form NRZT -snr -$i.$j -testTEB -mess 99999 -transducteur
 	done
 done
 for i in {0..25..1}
 do
 	for j in {0..9..1}
 	do
-		java simulateur.Simulateur -form NRZT -snr $i.$j -testTEB -mess 9999
+		java simulateur.Simulateur -form NRZT -snr $i.$j -testTEB -mess 99999 -transducteur
 	done
 done
 
+for i in {40..0..-1}
+do
+	for j in {9..0..-1}
+	do
+		java simulateur.Simulateur -form RZ -snr -$i.$j -testTEB -mess 99999 
+	done
+done
+for i in {0..25..1}
+do
+	for j in {0..9..1}
+	do
+		java simulateur.Simulateur -form RZ -snr $i.$j -testTEB -mess 99999
+	done
+done
+
+# NRZ
+for i in {40..0..-1}
+do
+	for j in {9..0..-1}
+	do
+		java simulateur.Simulateur -form NRZ -snr -$i.$j -testTEB -mess 99999
+	done
+done
+for i in {0..25..1}
+do
+	for j in {0..9..1}
+	do
+		java simulateur.Simulateur -form NRZ -snr $i.$j -testTEB -mess 99999
+	done
+done
+
+# NRZT
+for i in {40..0..-1}
+do
+	for j in {9..0..-1}
+	do
+		java simulateur.Simulateur -form NRZT -snr -$i.$j -testTEB -mess 99999
+	done
+done
+for i in {0..25..1}
+do
+	for j in {0..9..1}
+	do
+		java simulateur.Simulateur -form NRZT -snr $i.$j -testTEB -mess 99999
+	done
+done

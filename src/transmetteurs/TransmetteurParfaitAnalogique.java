@@ -1,7 +1,6 @@
 package transmetteurs;
 
-import java.util.LinkedList;
-
+import java.util.*;
 import destinations.*;
 import information.*;
 
